@@ -1,6 +1,7 @@
 .product{
     width: 220px;
     margin: 20px;
+    cursor: context-menu;
     position: relative;
     &__price{
         display: flex;
@@ -31,7 +32,55 @@
         background-repeat: no-repeat;
         background: rgba(0, 0, 0, 0.419);
         position: relative;
-        &::before{
+        &:hover &--button{
+            opacity: 1;
+        }
+        &--button{
+            cursor: pointer;
+            transition: .3s;
+            opacity: 0;
+            border-radius: 25px;
+            width: 100%;
+            height: 100%;
+            font-size: 28px;
+            background-color: #00000049;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            &-icon{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 7px;
+                translate: 0 15px;
+                color: white;
+            }
+            &.add{
+                .product__cover--button-icon{
+                    border: 1px solid white;
+                    border-radius: 50%;
+                }
+            }
+            &.remove{
+                .product__cover--button-icon{
+                    padding: 7px;
+                    translate: 0 15px;
+                    position: relative;
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        transform: rotate(45deg);
+                        height: 100%;
+                        border: 1px solid #fff;
+                        z-index: 1;
+                    }
+                }
+
+            }
+        }
+        &::before{z-index: 1;
             width: 200px;
             transform: translateY(-1px);
             border-top-left-radius:25px;
@@ -43,12 +92,13 @@
             position: absolute;
         }
         &::after{
+            z-index: 1;
             transform: translateY(-1px);
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             right: 10px;
             top: 10px;
             position: absolute;
-            content: attr(data-awayTime);
+            content: attr(data-time);
         }
     }
     &__rating{
