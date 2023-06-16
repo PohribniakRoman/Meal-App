@@ -1,5 +1,6 @@
 @import "reset.css";
 @import "search";
+@import "cart";
 @import "navbar";
 @import "product";
 
@@ -11,6 +12,8 @@
         margin-left: 20px;
     }
     &__title{
+        display: flex;
+        align-items: center;
         margin-top: 20px !important;
         margin-left: 25px !important;
         font-size: 32px !important;

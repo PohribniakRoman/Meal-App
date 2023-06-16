@@ -2,9 +2,10 @@ import { Typography } from "@mui/material"
 import { Navbar } from "../components/Navbar"
 import { Search } from "../components/Search"
 import { Product } from "../components/Product"
+import { SideCart } from "../components/SideCart";
 const template = {
     label:"Salo",
-    price:"500",
+    price:500,
     discount:false,
     view:102,
     store:"АТБ",
@@ -36,5 +37,6 @@ export const Shop:React.FC = () => {
                 <Product product={template}/>
             </div>
         </div>
+        <SideCart/>
     </section>
 }

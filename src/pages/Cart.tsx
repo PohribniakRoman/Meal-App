@@ -4,7 +4,7 @@ import { Product } from "../components/Product"
 
 const template = {
     label:"Salo",
-    price:"500",
+    price:500,
     discount:false,
     view:102,
     store:"АТБ",
