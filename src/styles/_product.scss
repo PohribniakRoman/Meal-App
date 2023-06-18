@@ -27,9 +27,9 @@
         height: 150px;
         border-radius: 25px;
         margin-bottom: 5px;
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
+        background-size: contain !important;
+        background-position-x:center !important;
+        background-position-y: 35px !important;
         background: rgba(0, 0, 0, 0.419);
         position: relative;
         &:hover &--button{
@@ -87,7 +87,7 @@
             border-top-right-radius:25px;
             content: attr(data-away) " away";
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            background-color: #fff;
+            background: #fff;
             padding: 10px;
             position: absolute;
         }

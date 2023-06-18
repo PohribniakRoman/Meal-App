@@ -5,8 +5,7 @@ import { Provider } from 'react-redux';
 
 const store = configureStore({reducer:combinedReducer});
 
-function App() {
-
+function App() {  
   return (
     <Provider store={store}>
       <Router/>

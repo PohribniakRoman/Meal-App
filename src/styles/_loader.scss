@@ -1,0 +1,16 @@
+.loader{
+    &__box{
+        &--page{
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            z-index: 1;
+            background-color: #eee !important;
+        }
+        &--product{
+            width: 100%;
+            height: 100%;
+            background-color: #eee !important; 
+        }
+    }
+}

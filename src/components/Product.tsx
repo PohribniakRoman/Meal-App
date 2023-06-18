@@ -1,33 +1,39 @@
 import { Typography } from "@mui/material";
-import { CartAction, CartItem } from "../services/reducers/cartReducer";
+import { CartItem } from "../services/reducers/cartReducer";
 import {AiFillStar, AiOutlineMinus, AiOutlinePlus} from "react-icons/ai";
 import {BiDollar} from "react-icons/bi";
 import {useEffect, useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { State } from "../services/reducers/combinedReducer";
+import { useUnsplash } from "../services/hooks/useUnsplash";
+import { ProductLoader } from "./loaders/ProductLoader";
+
 
 export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record<string,CartItem | any>) => {
-    const cartProducts = useSelector((state:State)=>state.cart.products)
     const dispatch = useDispatch()
+    const cartProducts = useSelector((state:State)=>state.cart.products)
+    
     const checkCart = ():boolean => cartProducts.filter(e=>e.id === product.id).length > 0
+    
     const [isInCart,setInCart] = useState<boolean>(checkCart());
+    const photo = useUnsplash(product.label);
 
     useEffect(()=>{
         setInCart(checkCart())
     },[cartProducts])
 
     const addToCart = (product:CartItem)=>{
-        const body:CartAction = {type:"ADD_ITEM",payload:{price:product.price,product}}
-        dispatch(body);
+        dispatch({type:"ADD_ITEM",payload:{price:product.price,product}});
     }
 
     const removeFromCart = (product:CartItem)=>{
-        const body:CartAction = {type:"REMOVE_ITEM",payload:{price:product.price,product}}
-        dispatch(body);
+        dispatch({type:"REMOVE_ITEM",payload:{price:product.price,product}});
     }
 
+
     return <section className="product">
-        <div className="product__cover" data-away={product.away} data-time={product.awayTime}>
+        {photo === null?<ProductLoader/>:<>
+        <div className="product__cover" style={{backgroundImage:`url(${photo})`}} data-away={product.away} data-time={product.awayTime}>
             {isInCart?
             <div className="product__cover--button remove" onClick={()=>removeFromCart(product)}>
                <Typography className="product__cover--button-icon"><AiOutlineMinus/></Typography>
@@ -50,7 +56,6 @@ export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record
                 <AiFillStar/>
                 </Typography>
             </div>
-        </div>
-    
+        </div></>}
     </section>
 }

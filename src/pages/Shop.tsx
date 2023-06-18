@@ -1,8 +1,12 @@
-import { Typography } from "@mui/material"
-import { Navbar } from "../components/Navbar"
-import { Search } from "../components/Search"
-import { Product } from "../components/Product"
+import { Typography } from "@mui/material";
+import { Navbar } from "../components/Navbar";
+import { Search } from "../components/Search";
+import { Product } from "../components/Product";
 import { SideCart } from "../components/SideCart";
+import { useMeal } from "../services/hooks/useMeal";
+import { PageLoader } from "../components/loaders/PageLoader";
+
+
 const template = {
     label:"Salo",
     price:500,
@@ -17,6 +21,13 @@ const template = {
 };
 
 export const Shop:React.FC = () => {
+    const meal = useMeal();
+    console.log(meal);
+    
+    if(meal === null){
+        return <PageLoader/>
+    }
+
     return <section className="page">
         <Navbar/>
         <div className="page__container">   

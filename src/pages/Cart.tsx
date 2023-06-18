@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar"
 import { Product } from "../components/Product"
 
 const template = {
-    label:"Salo",
+    label:"Vine",
     price:500,
     discount:false,
     view:102,
