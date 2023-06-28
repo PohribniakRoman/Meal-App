@@ -1,11 +1,10 @@
 import { Typography } from "@mui/material";
 import { CartItem } from "../services/reducers/cartReducer";
-import {AiFillStar, AiOutlineMinus, AiOutlinePlus} from "react-icons/ai";
+import { AiOutlineMinus, AiOutlinePlus} from "react-icons/ai";
 import {BiDollar} from "react-icons/bi";
 import {useEffect, useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { State } from "../services/reducers/combinedReducer";
-import { ProductLoader } from "./loaders/ProductLoader";
 
 
 export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record<string,CartItem | any>) => {
@@ -21,16 +20,16 @@ export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record
     },[cartProducts])
 
     const addToCart = (product:CartItem)=>{
-        dispatch({type:"ADD_ITEM",payload:{price:product.price,product}});
+        dispatch({type:"ADD_ITEM",payload:{price:Math.floor(product.idMeal/1000),product}});
     }
 
     const removeFromCart = (product:CartItem)=>{
-        dispatch({type:"REMOVE_ITEM",payload:{price:product.price,product}});
+        dispatch({type:"REMOVE_ITEM",payload:{price:Math.floor(product.idMeal/1000),product}});
     }
 
 
     return <section className="product">
-        <div className="product__cover" style={{backgroundImage:`url(${product.strMealThumb})`}} data-away={product.away} data-time={product.awayTime}>
+        <div className="product__cover" style={{backgroundImage:`url(${product.strMealThumb})`}} data-category={product.strCategory}>
             {isInCart?
             <div className="product__cover--button remove" onClick={()=>removeFromCart(product)}>
                <Typography className="product__cover--button-icon"><AiOutlineMinus/></Typography>
@@ -41,18 +40,11 @@ export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record
         </div>
         <div className="product__container">
         <Typography className="product__label">{product.strMeal}</Typography>
-        <Typography className="product__price"><BiDollar/>{product.price}</Typography>
+        <Typography className="product__price"><BiDollar/>{Math.floor(product.idMeal/1000)}</Typography>
         </div>
 
         <div className="product__container">
-            <Typography className="product__store">{product.store}</Typography>
-            <div className="product__rating">
-                <Typography className="product__view">({product.view} reviews)</Typography>
-                <Typography>
-                {product.rating}
-                <AiFillStar/>
-                </Typography>
-            </div>
+            <Typography className="product__store">{product.strArea}</Typography>
         </div>
     </section>
 }

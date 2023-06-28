@@ -12,12 +12,11 @@ export type Cart = {
 export type CartItem = {
     strMeal: string,
     price: number,
-    discount: boolean | number,
-    store: string,
+    strArea: string,
     strMealThumb: string,
-    view: number,
+    strCategory: string,
     rating: number,
-    idMeal: string | number,
+    idMeal: number,
 };
 
 export type CartAction = {

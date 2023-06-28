@@ -4,7 +4,7 @@ import {Navbar} from "../components/Navbar"
 export const Saved:React.FC = () => {
     return <section className="page">
         <Navbar/>
-        <div className="page__container">   
+        <div className="page__container fullsize">   
             <Typography className="page__title">Saved Products</Typography>
         </div>
     </section>

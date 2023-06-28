@@ -10,9 +10,99 @@
         }
         &--product{
             width: 100%;
-            z-index: 100;
             height: 100%;
             background-color: #eee !important; 
         }
     }
-}
+}.center-body {
+    height: 100%;
+    transform: translateY(-20%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .loader-circle-75 {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+  }
+  .loader-circle-75:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-width: 3px 3px;
+    border-style: solid;
+    border-color: #000 lightgray;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: loader-circle-75-spin 3s infinite;
+  }
+  .loader-circle-75:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    background-color: lightgray;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: loader-circle-75-pulse 6s infinite, loader-circle-75-borderPulse 6s infinite;
+    transform: translate(-50%, -50%);
+  }
+  @keyframes loader-circle-75-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(360deg);
+    }
+    100% {
+      transform: rotate(1080deg);
+    }
+  }
+  @keyframes loader-circle-75-pulse {
+    0% {
+      background-color: rgba(100, 100, 100, 0.2);
+    }
+    13% {
+      background-color: rgba(100, 100, 100, 0.2);
+    }
+    15% {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    28% {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    30% {
+      background-color: rgba(100, 100, 100, 0.2);
+    }
+    43% {
+      background-color: rgba(100, 100, 100, 0.2);
+    }
+    45% {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    70% {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    74% {
+      background-color: rgba(100, 100, 100, 0.2);
+    }
+    100% {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+  }
+  @keyframes loader-circle-75-borderPulse {
+    0% {
+      box-shadow: 0 0 0 0 #FFF, 0 0 0 1px rgba(100, 100, 100, 0.8);
+    }
+    40% {
+      box-shadow: 0 0 0 1px #FFF, 0 0 0 2px rgba(100, 100, 100, 0.8);
+    }
+    80% {
+      box-shadow: 0 0 0 3px #FFF, 0 0 1px 3px rgba(100, 100, 100, 0.8);
+    }
+  }

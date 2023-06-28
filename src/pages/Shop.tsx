@@ -1,40 +1,49 @@
-import { Typography } from "@mui/material";
+import {  Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar";
 import { Search } from "../components/Search";
 import { Product } from "../components/Product";
 import { SideCart } from "../components/SideCart";
 import { useMeal } from "../services/hooks/useMeal";
-import { PageLoader } from "../components/loaders/PageLoader";
-import {useEffect,useState} from "react";
+import {useState,useEffect} from "react";
+import { Loader } from "../components/loaders/Loader";
+
+const getDish = (size:number,dishList:any[],loadDish:Function) => {
+    const meal = useMeal();
+    const mealState = [...dishList];
+    (async ()=>{
+        console.log(dishList.length + size);
+        while (mealState.length < (dishList.length + size)) {
+            const newMeal = await meal.generateMeal();
+            if(!mealState.filter(e=>e.idMeal === newMeal.idMeal).length){
+                mealState.push(newMeal);
+            }
+        }
+        loadDish([...mealState])
+    })()
+}
 
 export const Shop:React.FC = () => {
-    const meal = useMeal();
     const [dishList,loadDish] = useState<any[]>([]);
-
+    
+    
     useEffect(()=>{
-        (async ()=>{
-            const newMeal = await meal.generateMeal();
-            loadDish(prev=>[...prev,newMeal])
-            console.log(dishList);
-        })()
+        getDish(16,dishList,loadDish);
     },[])
-
-    console.log(dishList);
-
-    if(!dishList.length){
-        return <PageLoader/>
-    }
     
     return <section className="page">
         <Navbar/>
         <div className="page__container">   
             <Search/>
+            <div className="page__label">
+            <div className="pushable" onClick={()=>{getDish(10,dishList,loadDish);}}><Typography className="front"> Load Products </Typography></div>
             <Typography className="page__title">Shop</Typography>
-            <div className="product__wrapper">
+            </div> 
+            {!dishList.length?<Loader/>:
+            <div className="product__wrapper" id="page-container">
                 {dishList.map(dish=>{
                     return <Product key={dish.idMeal} product={dish}/>
                 })}
-            </div>
+            </div>}
         </div>
         <SideCart/>
     </section>
