@@ -4,7 +4,6 @@ import { Product } from "../components/Product"
 import { useSelector } from "react-redux";
 import { State } from "../services/reducers/combinedReducer";
 import { BiDollar } from "react-icons/bi";
-import { CartItem } from "../services/reducers/cartReducer";
 
 
 export const Cart:React.FC = () =>{
