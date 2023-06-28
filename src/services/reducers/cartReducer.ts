@@ -10,14 +10,14 @@ export type Cart = {
 }
 
 export type CartItem = {
-    label: string,
+    strMeal: string,
     price: number,
     discount: boolean | number,
     store: string,
-    img: string,
+    strMealThumb: string,
     view: number,
     rating: number,
-    id: string | number,
+    idMeal: string | number,
 };
 
 export type CartAction = {
@@ -42,7 +42,7 @@ export const cartReducer = (state = defaultState, action: CartAction) => {
             return updateStorage({ price: state.price + action.payload.price, products: [...state.products, action.payload.product] })
         }
         case "REMOVE_ITEM":{
-            const newState: Cart = { price: state.price - action.payload.price, products: state.products.filter((product: CartItem) => product.id !== action.payload.product.id) }
+            const newState: Cart = { price: state.price - action.payload.price, products: state.products.filter((product: CartItem) => product.idMeal !== action.payload.product.idMeal) }
             return updateStorage(newState)
         }
         default:{

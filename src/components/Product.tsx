@@ -5,7 +5,6 @@ import {BiDollar} from "react-icons/bi";
 import {useEffect, useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { State } from "../services/reducers/combinedReducer";
-import { useUnsplash } from "../services/hooks/useUnsplash";
 import { ProductLoader } from "./loaders/ProductLoader";
 
 
@@ -13,10 +12,9 @@ export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record
     const dispatch = useDispatch()
     const cartProducts = useSelector((state:State)=>state.cart.products)
     
-    const checkCart = ():boolean => cartProducts.filter(e=>e.id === product.id).length > 0
+    const checkCart = ():boolean => cartProducts.filter(e=>e.idMeal === product.idMeal).length > 0
     
     const [isInCart,setInCart] = useState<boolean>(checkCart());
-    const photo = useUnsplash(product.label);
 
     useEffect(()=>{
         setInCart(checkCart())
@@ -32,8 +30,7 @@ export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record
 
 
     return <section className="product">
-        {photo === null?<ProductLoader/>:<>
-        <div className="product__cover" style={{backgroundImage:`url(${photo})`}} data-away={product.away} data-time={product.awayTime}>
+        <div className="product__cover" style={{backgroundImage:`url(${product.strMealThumb})`}} data-away={product.away} data-time={product.awayTime}>
             {isInCart?
             <div className="product__cover--button remove" onClick={()=>removeFromCart(product)}>
                <Typography className="product__cover--button-icon"><AiOutlineMinus/></Typography>
@@ -43,7 +40,7 @@ export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record
             </div>}
         </div>
         <div className="product__container">
-        <Typography className="product__label">{product.label}</Typography>
+        <Typography className="product__label">{product.strMeal}</Typography>
         <Typography className="product__price"><BiDollar/>{product.price}</Typography>
         </div>
 
@@ -56,6 +53,6 @@ export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record
                 <AiFillStar/>
                 </Typography>
             </div>
-        </div></>}
+        </div>
     </section>
 }

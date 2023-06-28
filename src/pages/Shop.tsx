@@ -5,47 +5,35 @@ import { Product } from "../components/Product";
 import { SideCart } from "../components/SideCart";
 import { useMeal } from "../services/hooks/useMeal";
 import { PageLoader } from "../components/loaders/PageLoader";
-
-
-const template = {
-    label:"Salo",
-    price:500,
-    discount:false,
-    view:102,
-    store:"АТБ",
-    away:"2km",
-    awayTime:"20 min",
-    id:1,
-    rating:5,
-    img:"",
-};
+import {useEffect,useState} from "react";
 
 export const Shop:React.FC = () => {
     const meal = useMeal();
-    console.log(meal);
-    
-    if(meal === null){
+    const [dishList,loadDish] = useState<any[]>([]);
+
+    useEffect(()=>{
+        (async ()=>{
+            const newMeal = await meal.generateMeal();
+            loadDish(prev=>[...prev,newMeal])
+            console.log(dishList);
+        })()
+    },[])
+
+    console.log(dishList);
+
+    if(!dishList.length){
         return <PageLoader/>
     }
-
+    
     return <section className="page">
         <Navbar/>
         <div className="page__container">   
             <Search/>
             <Typography className="page__title">Shop</Typography>
             <div className="product__wrapper">
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
-                <Product product={template}/>
+                {dishList.map(dish=>{
+                    return <Product key={dish.idMeal} product={dish}/>
+                })}
             </div>
         </div>
         <SideCart/>
