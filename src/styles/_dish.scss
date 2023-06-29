@@ -1,0 +1,25 @@
+.dish {
+  max-height: 80vh;
+  overflow-y: scroll;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #000;
+  }
+  &__cover {
+    margin: 30px 0;
+    min-width: 400px;
+    min-height: 400px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  &__instruction {
+    width: 50%;
+  }
+}

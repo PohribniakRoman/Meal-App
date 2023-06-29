@@ -1,5 +1,6 @@
 @import "reset.css";
 @import "search";
+@import "dish";
 @import "loader";
 @import "cart";
 @import "navbar";
@@ -67,3 +68,51 @@
   .pushable:focus:not(:focus-visible) {
     outline: none;
   }
+  .modal{
+    position: fixed;
+    z-index: 100;
+    background-color: rgba($color: #000000, $alpha: 0.15);
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal.show{
+    animation-name: show;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+  }
+
+  .modal.closed{
+    z-index: -1;
+    animation-name: hide;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes hide{
+    0%{
+      opacity: 1;
+      z-index: 100;
+    }
+    100%{
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+
+  @keyframes show{
+    0%{
+      opacity: 0;
+      z-index: -1;
+    }
+    100%{
+      opacity: 1;
+      z-index: 100;
+    }
+  }
+

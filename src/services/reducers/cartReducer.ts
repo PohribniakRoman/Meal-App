@@ -15,7 +15,7 @@ export type CartItem = {
     strArea: string,
     strMealThumb: string,
     strCategory: string,
-    rating: number,
+    strInstructions: string,
     idMeal: number,
 };
 

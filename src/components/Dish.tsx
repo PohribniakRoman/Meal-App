@@ -5,9 +5,10 @@ import {BiDollar} from "react-icons/bi";
 import {useEffect, useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { State } from "../services/reducers/combinedReducer";
+import { Link } from "react-router-dom";
 
 
-export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record<string,CartItem | any>) => {
+export const Dish:React.FC<Record<string,CartItem | any>> = ({product}:Record<string,CartItem | any>) => {
     const dispatch = useDispatch()
     const cartProducts = useSelector((state:State)=>state.cart.products)
     
@@ -38,10 +39,10 @@ export const Product:React.FC<Record<string,CartItem | any>> = ({product}:Record
                 <Typography className="product__cover--button-icon"><AiOutlinePlus/></Typography>
             </div>}
         </div>
-        <div className="product__container">
-        <Typography className="product__label">{product.strMeal}</Typography>
-        <Typography className="product__price"><BiDollar/>{Math.floor(product.idMeal/1000)}</Typography>
-        </div>
+        <Link target="_blank" to={`/dish/${product.idMeal}`} className="product__container">
+            <Typography className="product__label">{product.strMeal}</Typography>
+            <Typography className="product__price"><BiDollar/>{Math.floor(product.idMeal/1000)}</Typography>
+        </Link>
 
         <div className="product__container">
             <Typography className="product__store">{product.strArea}</Typography>

@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar"
-import { Product } from "../components/Product"
+import { Dish } from "../components/Dish"
 import { useSelector } from "react-redux";
 import { State } from "../services/reducers/combinedReducer";
 import { BiDollar } from "react-icons/bi";
@@ -15,7 +15,7 @@ export const Cart:React.FC = () =>{
         <Typography className="page__title">Cart / {cart.price}<BiDollar/></Typography>
         <div className="side-cart__container">
                 {!cart.products.length ?<Typography variant="h2" className="cart__placeholder">There is nothing in your cart:(</Typography> :cart.products.map((product)=>{
-                    return <Product key={product.idMeal} product={product}/>
+                    return <Dish key={product.idMeal} product={product}/>
                 })}
             </div>
         </div>

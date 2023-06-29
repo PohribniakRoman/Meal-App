@@ -1,7 +1,7 @@
 import {  Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar";
-import { Search } from "../components/Search";
-import { Product } from "../components/Product";
+import { Search } from "../components/Search/Search";
+import { Dish } from "../components/Dish";
 import { SideCart } from "../components/SideCart";
 import { useMeal } from "../services/hooks/useMeal";
 import {useState,useEffect} from "react";
@@ -11,7 +11,6 @@ const getDish = (size:number,dishList:any[],loadDish:Function) => {
     const meal = useMeal();
     const mealState = [...dishList];
     (async ()=>{
-        console.log(dishList.length + size);
         while (mealState.length < (dishList.length + size)) {
             const newMeal = await meal.generateMeal();
             if(!mealState.filter(e=>e.idMeal === newMeal.idMeal).length){
@@ -41,7 +40,7 @@ export const Shop:React.FC = () => {
             {!dishList.length?<Loader/>:
             <div className="product__wrapper" id="page-container">
                 {dishList.map(dish=>{
-                    return <Product key={dish.idMeal} product={dish}/>
+                    return <Dish key={dish.idMeal} product={dish}/>
                 })}
             </div>}
         </div>

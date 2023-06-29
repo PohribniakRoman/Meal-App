@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { State } from "../services/reducers/combinedReducer"
 import { Typography } from "@mui/material"
 import { BiDollar } from "react-icons/bi"
-import { Product } from "./Product"
+import { Dish } from "./Dish"
 import { useRef } from "react"
 
 export const SideCart:React.FC = () =>{
@@ -30,7 +30,7 @@ export const SideCart:React.FC = () =>{
             <Typography className="page__title">Cart / {cart.price}<BiDollar/></Typography>
             <div className="side-cart__container">
             {!cart.products.length ?<Typography variant="h5" className="cart__placeholder">There is nothing in your cart:(</Typography> :cart.products.map((product)=>{
-                    return <Product key={product.idMeal} product={product}/>
+                    return <Dish key={product.idMeal} product={product}/>
                 })}
             </div>
         </div>
