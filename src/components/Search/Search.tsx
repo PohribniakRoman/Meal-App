@@ -8,7 +8,7 @@ export const Search:React.FC = () => {
     <SearchModel isOpened={isOpened} setOpened={setOpened}/>
     <section className="search" onClick={()=>setOpened(true)}>
         <span className="search__wrapper">
-            <input value="" type="text" className="search__field" placeholder="Search"/>
+            <input value="" onChange={()=>{}} type="text" className="search__field" placeholder="Search"/>
             <BiSearchAlt2/>
         </span>
         <div className="search__result"></div>

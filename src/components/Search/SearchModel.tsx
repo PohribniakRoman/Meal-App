@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { useRef, useState,useEffect} from "react";
+import React, { useRef, useState,useEffect} from "react";
 import { SearchInput } from "./SearchInput";
 import { useMeal } from "../../services/hooks/useMeal";
 import { Loader } from "../loaders/Loader";
@@ -19,7 +19,7 @@ export const SearchModel:React.FC<modal> = ({isOpened,setOpened}:modal) =>{
     const [searchValue,setSearchValue] = useState<string>("");
     const [searchResult,setSearchResult] = useState<"template"|"loading"|any[]>("template");
     const meal = useMeal();
-
+    
     useEffect(()=>{
         if(searchValue.trim().length === 1 && currentValue !== searchValue){
             (async ()=>{
@@ -50,9 +50,10 @@ export const SearchModel:React.FC<modal> = ({isOpened,setOpened}:modal) =>{
                         {searchResult === "template" && <Typography className="search-modal__result--placeholder">Type something...</Typography>}
                         {searchResult === "loading" && <Loader/>}
                         {typeof searchResult === "object" && searchResult.map(dish=>{
-                            return  <Link target="_blank" to={`/dish/${dish.idMeal}`}className="search-modal__result--item" key={dish.idMeal}>
+                            return  <React.Fragment  key={dish.idMeal}><Link to={`/dish/${dish.idMeal}`}className="search-modal__result--item">
                                 <Typography >{dish.strMeal}</Typography>
-                            </Link>
+                            </Link><br/>
+                            </React.Fragment>
                         })}
                     </div>
             </div>

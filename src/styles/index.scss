@@ -6,6 +6,14 @@
 @import "navbar";
 @import "product";
 
+.fullsize-loader{
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .page{
     min-height: 100vh;
     background-color: #f0f5f7;

@@ -1,25 +1,100 @@
 .dish {
-  max-height: 80vh;
+  min-height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
   overflow-y: scroll;
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin: 0 !important;
+  width: 100%;
+  & *{user-select: text !important;}
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 0;
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: #000;
   }
+  &--title{
+    text-align: center;
+  }
+  &--subtitle{
+    text-align: center;
+    margin: 20px !important;
+    font-style: italic !important;
+  }
   &__cover {
-    margin: 30px 0;
-    min-width: 400px;
-    min-height: 400px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-rows: repeat(2,1fr);
+    &--item{
+      width:100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &.main{
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column-start: 3;
+        grid-column-end: 5;
+      }
+    }
+    &--secondary{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;  
+      object-position: center;
+      &.preloader{
+        animation: spin 3s infinite;
+        position: relative;
+        width: 50%;
+        height: 50%;
+        border-radius: 50%;
+        background: #000;
+        border-width: 3px 3px;
+        border-style: solid;
+        border-color: #000 lightgray;
+        box-shadow: inset 0 0 0 50px #fff;
+        filter: blur(5px);
+      }
+    }
   }
   &__instruction {
     width: 50%;
+    &::first-letter{
+      margin-left: 30px;
+    }
+    font-size: 18px !important;
+  }
+  &__globals {
+    display: flex;
+    align-items: center;
+    & i {
+      user-select: none !important;
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: context-menu;
+    }
+    b {
+      cursor: context-menu;
+      user-select: none !important;
+      margin: 0 10px;
+      font-size: 40px;
+    }
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(1080deg);
   }
 }

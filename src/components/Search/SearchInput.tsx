@@ -10,7 +10,7 @@ export const SearchInput:React.FC<InputCotroller> = ({value,setValue})=>{
     return <div className="search-modal__input--container">
     <TextField autoFocus variant="outlined" name="meal-search" label="Dish name" className="search-modal__input" value={value} onChange={(event)=>{
         const element = event.target as HTMLInputElement;
-        setValue(element.value);
+        setValue(element.value.replace(/[.*+?^${}()|[\]\\1-9-+/0=]/g,""));
     }}/>
     <Typography className={`search-modal__input--clear ${value?"shown":"hidden"}`} onClick={()=>setValue("")}><AiFillDelete/></Typography>
 </div>

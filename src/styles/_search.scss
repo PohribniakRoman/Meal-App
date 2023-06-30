@@ -89,15 +89,29 @@
             text-align: center;
         }
         &--item{
+            color: #000 !important;
+            margin-left: 25px;
             display: flex;
             align-items: center;
             height: 30px;
             transition: .3s;
             cursor: pointer;
-            &:hover{
-                background-color: lightgray;
+            display: inline-block;
+            position: relative;
+            &:hover::after{
+              width: 100%;
             }
-        }
+            &::after{
+              width: 0%;
+              transition: .3s;
+              content: '';
+              position: absolute;
+              height: 2px;
+              background-color: #000;
+              bottom: 5px;
+              left: 0;
+            }
+          }
     }
   }
 }

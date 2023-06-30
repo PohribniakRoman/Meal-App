@@ -39,7 +39,7 @@ export const Dish:React.FC<Record<string,CartItem | any>> = ({product}:Record<st
                 <Typography className="product__cover--button-icon"><AiOutlinePlus/></Typography>
             </div>}
         </div>
-        <Link target="_blank" to={`/dish/${product.idMeal}`} className="product__container">
+        <Link  to={`/dish/${product.idMeal}`} className="product__container">
             <Typography className="product__label">{product.strMeal}</Typography>
             <Typography className="product__price"><BiDollar/>{Math.floor(product.idMeal/1000)}</Typography>
         </Link>
