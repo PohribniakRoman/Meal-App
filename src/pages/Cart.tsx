@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar"
-import { Dish } from "../components/Dish"
+import { Dish } from "../components/Dish/Dish"
 import { useSelector } from "react-redux";
 import { State } from "../services/reducers/combinedReducer";
 import { BiDollar } from "react-icons/bi";

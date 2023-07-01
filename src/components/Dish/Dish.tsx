@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
-import { CartItem } from "../services/reducers/cartReducer";
+import { CartItem } from "../../services/reducers/cartReducer";
 import { AiOutlineMinus, AiOutlinePlus} from "react-icons/ai";
 import {BiDollar} from "react-icons/bi";
 import {useEffect, useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { State } from "../services/reducers/combinedReducer";
+import { State } from "../../services/reducers/combinedReducer";
 import { Link } from "react-router-dom";
 
 

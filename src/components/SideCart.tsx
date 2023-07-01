@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { State } from "../services/reducers/combinedReducer"
 import { Typography } from "@mui/material"
 import { BiDollar } from "react-icons/bi"
-import { Dish } from "./Dish"
+import { Dish } from "./Dish/Dish"
 import { useRef } from "react"
 
 export const SideCart:React.FC = () =>{

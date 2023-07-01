@@ -5,14 +5,23 @@ import { Loader } from "../components/loaders/Loader";
 import { CartItem } from "../services/reducers/cartReducer";
 import { Typography } from "@mui/material";
 import { useUnsplash } from "../services/hooks/useUnsplash";
+import { Ingredient } from "../components/Dish/Ingredient";
+
+
+export interface DishIngredients {
+    ingredient:string,
+    measure:string,
+}
 
 export const DishPage:React.FC = () => {
     const params = useParams();
     const meal = useMeal();
     const unsplash = useUnsplash();
+    const once = useRef<boolean>(true);
     const [dish,loadDish] = useState<CartItem|null>(null)
     const [secondaryImages,loadSecondaryImages] = useState<null|string[]>(null);
-    const once = useRef<boolean>(true);
+    const [dishIngredients,updateIngridients] = useState<DishIngredients[]|[]>([]);
+
     
     useEffect(()=>{
         if(once.current){
@@ -20,7 +29,17 @@ export const DishPage:React.FC = () => {
             (async ()=>{
                 const result = await meal.getMealById(params);
                 if(result.strMeal){
-                    loadSecondaryImages((await unsplash.generatePhoto(result.strMeal,8)).map((element:any) => element.links.download))
+                    loadSecondaryImages((await unsplash.generatePhoto(result.strMeal,8)).map((element:any) => element.urls.small))
+                    const ingredientCollector = [] as DishIngredients[];
+                    for(const key in result){
+                        if(key.startsWith("strIngredient") && result[key]){
+                            ingredientCollector.push({ingredient:result[key],measure:""})
+                        }
+                        if(key.startsWith("strMeasure") && result[key]){
+                            ingredientCollector[parseInt(key.split("strMeasure")[1])-1].measure = result[key];
+                        }
+                    }
+                    updateIngridients(ingredientCollector);
                     loadDish(result);
                 }
             })();
@@ -32,6 +51,8 @@ export const DishPage:React.FC = () => {
         element.classList.remove("preloader");
     }
 
+        console.log(dish);
+        
     return <section className="dish">
             {!dish || !secondaryImages?<Loader fullsize={true}/>:<>
             <Typography variant="h3" className="dish--title">{dish.strMeal}</Typography>
@@ -45,17 +66,21 @@ export const DishPage:React.FC = () => {
                     return index === 5?
                     <React.Fragment key={index}>
                     <div key={dish.strMealThumb} className="dish__cover--item main">
-                        <img src={dish.strMealThumb} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
+                        <img loading="lazy" src={dish.strMealThumb} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
                     </div>
                     <div key={url} className="dish__cover--item">
-                        <img src={url} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
+                        <img loading="lazy" src={url} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
                     </div>
                     </React.Fragment>:
                     <div key={url} className="dish__cover--item">
-                        <img  src={url} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
+                        <img loading="lazy" src={url} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
                     </div>})}
             </div>
-            <Typography className="dish--subtitle" variant="h4">Recipe</Typography>
+            <Typography className="dish--title" variant="h4">Ingredients</Typography>
+            <div className="dish__ingredients">{dishIngredients.map(ingredient=>{
+                return <Ingredient key={ingredient.ingredient} data={ingredient}/>
+            })}</div>
+            <Typography className="dish--title" variant="h4">Recipe</Typography>
             <Typography className="dish__instruction">{dish.strInstructions}</Typography>
             </>}
         </section>

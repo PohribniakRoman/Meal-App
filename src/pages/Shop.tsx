@@ -1,7 +1,7 @@
 import {  Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar";
 import { Search } from "../components/Search/Search";
-import { Dish } from "../components/Dish";
+import { Dish } from "../components/Dish/Dish";
 import { SideCart } from "../components/SideCart";
 import { useMeal } from "../services/hooks/useMeal";
 import {useState,useEffect} from "react";
