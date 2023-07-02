@@ -8,6 +8,12 @@
   flex-direction: column;
   margin: 0 !important;
   width: 100%;
+  & a{
+    text-decoration: underline;
+    &:hover{
+      text-decoration: none;
+    }
+  }
   & *{user-select: text !important;}
   &::-webkit-scrollbar {
     width: 0;
@@ -16,7 +22,19 @@
     border-radius: 10px;
     background-color: #000;
   }
+  &__video{
+    &--item{
+      width: 50vw;
+      height: 50vh;
+      margin-bottom: 50px;
+    }
+  }
   &__ingredients{
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     &--helper{
       position: absolute;
       left: 0;
@@ -28,15 +46,17 @@
       justify-content: center;
       flex-direction: column;
       border-radius: 15px;
+      transform: translateY(-100%);
       box-shadow: 0 0 10px 2px rgba($color: #000000, $alpha: 0.15);
       &-measure{
+        width: 13vw;
         &::first-letter{
           text-transform: uppercase;
         }
       } 
       &-cover{
-        width: 250px;
-        height: 250px;
+        width: 13vw;
+        height: 13vw;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -103,6 +123,7 @@
     }
   }
   &__instruction {
+    text-align: justify;
     width: 50%;
     &::first-letter{
       margin-left: 30px;

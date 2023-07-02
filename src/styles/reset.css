@@ -44,9 +44,9 @@ table {
 a{
 	color: unset;
 	text-decoration: none;
+	outline: none;
 }
 a:visited{
 	color: unset;
 	text-decoration: none;
-
 }

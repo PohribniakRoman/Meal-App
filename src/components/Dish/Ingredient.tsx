@@ -20,7 +20,7 @@ export const Ingredient:React.FC<Ingredient> = ({data}) =>{
     const once = useRef<boolean>(true);
 
     const mouseMoveHandler = (event:MouseEvent) =>{
-        setHelperState({isVisivle:true,x:event.x+20,y:event.y})
+        setHelperState({isVisivle:true,x:event.x+10,y:event.y})
     }
 
     useEffect(()=>{

@@ -13,6 +13,7 @@ export type CartItem = {
     strMeal: string,
     price: number,
     strArea: string,
+    strYoutube:string,
     strMealThumb: string,
     strCategory: string,
     strInstructions: string,

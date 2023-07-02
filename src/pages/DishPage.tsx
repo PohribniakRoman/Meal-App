@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useMeal } from "../services/hooks/useMeal";
 import React, { useEffect, useState,useRef } from "react";
 import { Loader } from "../components/loaders/Loader";
@@ -55,7 +55,7 @@ export const DishPage:React.FC = () => {
         
     return <section className="dish">
             {!dish || !secondaryImages?<Loader fullsize={true}/>:<>
-            <Typography variant="h3" className="dish--title">{dish.strMeal}</Typography>
+            <Link target="_blank" to="https://www.bbcgoodfood.com/recipes/3028701/threecheese-souffls"><Typography variant="h3" className="dish--title">{dish.strMeal}</Typography></Link>
             <Typography className="dish__globals">
                 <i>{dish.strArea}</i>
                 <b>/</b>
@@ -82,6 +82,10 @@ export const DishPage:React.FC = () => {
             })}</div>
             <Typography className="dish--title" variant="h4">Recipe</Typography>
             <Typography className="dish__instruction">{dish.strInstructions}</Typography>
+            <Typography className="dish--title" variant="h4">Video guide</Typography>
+            <div className="dish__video">
+            <iframe className="dish__video--item" src={`https://www.youtube.com/embed/${dish.strYoutube.split("=").pop()}`} title={dish.strMeal} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+            </div>
             </>}
         </section>
 }
