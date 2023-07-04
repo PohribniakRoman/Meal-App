@@ -6,13 +6,16 @@ export const useUnsplash = () =>{
         const unsplash = createApi({
             accessKey: import.meta.env.VITE_UNSPLASH_API_KEY,
         });
-        const response = (await (unsplash.search.getPhotos({
-            query,
-            perPage:size,
-            orientation:"squarish",
-            orderBy:"relevant"
+        try{
+            const response = (await (unsplash.search.getPhotos({
+                query,
+                perPage:size,
+                orientation:"squarish",
+                orderBy:"relevant"
             }))).response?.results;
             return response as any[];
+        }catch{};
+        return [];
     }
 
     return {generatePhoto};

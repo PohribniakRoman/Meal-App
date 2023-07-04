@@ -19,7 +19,7 @@ export const DishPage:React.FC = () => {
     const unsplash = useUnsplash();
     const once = useRef<boolean>(true);
     const [dish,loadDish] = useState<CartItem|null>(null)
-    const [secondaryImages,loadSecondaryImages] = useState<null|string[]>(null);
+    const [secondaryImages,loadSecondaryImages] = useState<null|string[]|"error">(null);
     const [dishIngredients,updateIngridients] = useState<DishIngredients[]|[]>([]);
 
     
@@ -29,18 +29,24 @@ export const DishPage:React.FC = () => {
             (async ()=>{
                 const result = await meal.getMealById(params);
                 if(result.strMeal){
-                    loadSecondaryImages((await unsplash.generatePhoto(result.strMeal,8)).map((element:any) => element.urls.small))
+                    console.log(result);
+                    const newState = (await unsplash.generatePhoto(result.strMeal,8)).map((element:any) => element.urls.small);
                     const ingredientCollector = [] as DishIngredients[];
                     for(const key in result){
-                        if(key.startsWith("strIngredient") && result[key]){
+                        if(key.startsWith("strIngredient") && result[key].trim()){
                             ingredientCollector.push({ingredient:result[key],measure:""})
                         }
-                        if(key.startsWith("strMeasure") && result[key]){
+                        if(key.startsWith("strMeasure") && result[key].trim()){
                             ingredientCollector[parseInt(key.split("strMeasure")[1])-1].measure = result[key];
                         }
                     }
                     updateIngridients(ingredientCollector);
                     loadDish(result);
+                    if(!newState.length){
+                        loadSecondaryImages("error");
+                    }else{
+                        loadSecondaryImages(newState);
+                    }
                 }
             })();
         }
@@ -51,7 +57,6 @@ export const DishPage:React.FC = () => {
         element.classList.remove("preloader");
     }
 
-        console.log(dish);
         
     return <section className="dish">
             {!dish || !secondaryImages?<Loader fullsize={true}/>:<>
@@ -62,7 +67,11 @@ export const DishPage:React.FC = () => {
                 <i>{dish.strCategory}</i>
             </Typography>
             <div className="dish__cover" >
-                {secondaryImages.map((url,index)=>{
+                {secondaryImages === "error"?
+                    <div key={dish.strMealThumb} className="dish__cover--item main">
+                        <img loading="lazy" src={dish.strMealThumb} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
+                    </div>
+                :(secondaryImages.map((url,index)=>{
                     return index === 5?
                     <React.Fragment key={index}>
                     <div key={dish.strMealThumb} className="dish__cover--item main">
@@ -74,7 +83,7 @@ export const DishPage:React.FC = () => {
                     </React.Fragment>:
                     <div key={url} className="dish__cover--item">
                         <img loading="lazy" src={url} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
-                    </div>})}
+                    </div>}))}
             </div>
             <Typography className="dish--title" variant="h4">Ingredients</Typography>
             <div className="dish__ingredients">{dishIngredients.map(ingredient=>{
