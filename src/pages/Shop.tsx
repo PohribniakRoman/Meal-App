@@ -1,5 +1,6 @@
 import {  Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar";
+import {RiRefreshLine} from "react-icons/ri";
 import { Search } from "../components/Search/Search";
 import { Dish } from "../components/Dish/Dish";
 import { SideCart } from "../components/SideCart";
@@ -32,9 +33,8 @@ export const Shop:React.FC = () => {
     return <section className="page">
         <Navbar/>
         <div className="page__container">   
-            <Search/>
+            {/* <Search/> */}
             <div className="page__label">
-            <div className="pushable" onClick={()=>{getDish(10,dishList,loadDish);}}><Typography className="front"> Load Products </Typography></div>
             <Typography className="page__title">Shop</Typography>
             </div> 
             {!dishList.length?<Loader/>:
@@ -43,6 +43,7 @@ export const Shop:React.FC = () => {
                     return <Dish key={dish.idMeal} product={dish}/>
                 })}
             </div>}
+            <div className="pushable" onClick={()=>{getDish(10,dishList,loadDish);}}><Typography className="front"> <RiRefreshLine/></Typography></div>
         </div>
         <SideCart/>
     </section>

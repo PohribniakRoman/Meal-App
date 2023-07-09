@@ -6,7 +6,7 @@
 @import "navbar";
 @import "product";
 
-.fullsize-loader{
+.fullsize-loader {
   min-width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -14,113 +14,118 @@
   justify-content: center;
 }
 
-.page{
-    min-height: 100vh;
-    background-color: #f0f5f7;
-    display: flex;
-    justify-content: space-between;
-    &__container{
-        margin-left: 20px;
-        &.fullsize{
-            width: calc(100vw - 125px);
-        }
+.page {
+  min-height: 100vh;
+  background-color: #e2e6e8;
+  display: flex;
+  justify-content: space-between;
+  &__container {
+    margin-left: 20px;
+    &.fullsize {
+      width: calc(100vw - 125px);
     }
-    &__title{
-        display: flex;
-        align-items: center;
-        margin-top: 20px !important;
-        margin-left: 25px !important;
-        font-size: 32px !important;
-    }
-    &__label{
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: center;
-        justify-content: space-between;
-    }
-}
-* {
-    user-select: none;
-}
-.front {
-    will-change: transform;
-    transition: transform 250ms;
   }
-
-  .pushable:hover .front {
-    transform: translateY(-6px);
-  }
-  
-  .pushable:active .front {
-    transform: translateY(-2px);
-  }
-  .pushable {
-    margin-right: 20px;
-    margin-top: 40px;
-    display: inline-block;
-    background: lightgray;
-    border: none;
-    border-radius: 30px;
-    padding: 0;
-    cursor: pointer;
-  }
-  .front {
-    display: block;
-    padding: 5px 40px;
-    border-radius: 30px;
-    font-size: 14px !important;
-    background: #000;
-    color: white;
-    transform: translateY(-4px);
-  }
-  .pushable:focus:not(:focus-visible) {
-    outline: none;
-  }
-  .modal{
-    position: fixed;
-    z-index: 100;
-    background-color: rgba($color: #000000, $alpha: 0.15);
-    width: 100vw;
-    height: 100vh;
-    left: 0;
-    top: 0;
+  &__title {
     display: flex;
     align-items: center;
+    margin-top: 20px !important;
+    margin-left: 25px !important;
+    font-size: 32px !important;
+  }
+  &__label {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    // justify-content: space-between;
     justify-content: center;
   }
+}
+* {
+  user-select: none;
+}
+.front {
+  will-change: transform;
+  transition: transform 250ms;
+}
 
-  .modal.show{
-    animation-name: show;
-    animation-duration: .5s;
-    animation-iteration-count: 1;
+.pushable:hover .front {
+  transform: translateY(-6px);
+}
+
+.pushable:active .front {
+  transform: translateY(-2px);
+}
+.pushable {
+  background: lightgray;
+  border-radius: 30px;
+  cursor: pointer;
+  max-width: 50px;
+  margin: 20px auto;
+}
+.front {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  & svg {
+    font-size: 24px !important;
   }
+  border-radius: 30px;
+  font-size: 14px !important;
+  background: #0e0d0b;
+  color: white;
+  transform: translateY(-4px);
+}
+.pushable:focus:not(:focus-visible) {
+  outline: none;
+}
+.modal {
+  position: fixed;
+  z-index: 100;
+  background-color: rgba($color: #000000, $alpha: 0.15);
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .modal.closed{
+.modal.show {
+  animation-name: show;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+}
+
+.modal.closed {
+  z-index: -1;
+  animation-name: hide;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+    z-index: 100;
+  }
+  100% {
+    opacity: 0;
     z-index: -1;
-    animation-name: hide;
-    animation-duration: .5s;
-    animation-iteration-count: 1;
   }
+}
 
-  @keyframes hide{
-    0%{
-      opacity: 1;
-      z-index: 100;
-    }
-    100%{
-      opacity: 0;
-      z-index: -1;
-    }
+@keyframes show {
+  0% {
+    opacity: 0;
+    z-index: -1;
   }
-
-  @keyframes show{
-    0%{
-      opacity: 0;
-      z-index: -1;
-    }
-    100%{
-      opacity: 1;
-      z-index: 100;
-    }
+  100% {
+    opacity: 1;
+    z-index: 100;
   }
-
+}
