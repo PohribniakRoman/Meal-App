@@ -1,6 +1,7 @@
 import {BiSearchAlt2} from "react-icons/bi";
 import { SearchModel } from "./SearchModel";
 import {useState} from "react";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export const Search:React.FC = () => {
     const [isOpened,setOpened] = useState<boolean|"loaded">("loaded");
@@ -8,8 +9,12 @@ export const Search:React.FC = () => {
     <SearchModel isOpened={isOpened} setOpened={setOpened}/>
     <section className="search" onClick={()=>setOpened(true)}>
         <span className="search__wrapper">
-            <input value="" onChange={()=>{}} type="text" className="search__field" placeholder="Search"/>
-            <BiSearchAlt2/>
+            <i>
+                <BiSearchAlt2/>
+            </i>
+            <b>
+                <AiOutlineShoppingCart/>
+            </b>
         </span>
         <div className="search__result"></div>
     </section>

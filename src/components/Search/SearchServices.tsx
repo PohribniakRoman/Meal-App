@@ -22,7 +22,7 @@ const calculateHeight = (state:("template"|"loading"|any[])):string =>{
     if(state === "loading"){
         height = 130;
     }
-    if(typeof state === "object"){
+    if(typeof state === "object" && state !== null){
         height = state.length * blockHeight;
     }
     return height+"px";

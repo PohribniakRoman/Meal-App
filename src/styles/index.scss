@@ -61,15 +61,31 @@
   border-radius: 30px;
   cursor: pointer;
   max-width: 50px;
-  margin: 20px auto;
+  margin: 0 auto;
+  margin-top: 17px;
 }
-.front {
+@keyframes rotateLoading {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+  transform: rotate(360deg);
+  }
+}
+  .front {
   width: 100%;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 50px;
+    &.rotate{
+      & svg{
+        animation-name: rotateLoading;
+        animation-duration: 1.7s;
+        animation-iteration-count: infinite;
+      }
+    }
   & svg {
     font-size: 24px !important;
   }

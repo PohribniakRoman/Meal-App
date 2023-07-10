@@ -34,7 +34,7 @@ export const SearchModel:React.FC<modal> = ({isOpened,setOpened}:modal) =>{
             setSearchResult("template");
             currentValue="";
         }
-        if(searchValue.length>1 && typeof searchResult === "object"){
+        if(searchValue.length>1 && typeof searchResult === "object" && searchResult !== null){
             const comparison = SearchServices.findMatch({value:searchValue,data:searchResult});
             setSearchResult(comparison.length?comparison:currentList);
         }
@@ -49,7 +49,7 @@ export const SearchModel:React.FC<modal> = ({isOpened,setOpened}:modal) =>{
                     <div className="search-modal__result" style={{height:SearchServices.calculateHeight(searchResult)}}>
                         {searchResult === "template" && <Typography className="search-modal__result--placeholder">Type something...</Typography>}
                         {searchResult === "loading" && <Loader/>}
-                        {typeof searchResult === "object" && searchResult.map(dish=>{
+                        {typeof searchResult === "object" && searchResult !== null && searchResult.map(dish=>{
                             return  <React.Fragment  key={dish.idMeal}><Link to={`/dish/${dish.idMeal}`}className="search-modal__result--item">
                                 <Typography >{dish.strMeal}</Typography>
                             </Link><br/>

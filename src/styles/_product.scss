@@ -120,16 +120,19 @@
         overflow: hidden;
         overflow-y: scroll;
         display: flex;
+        align-items: center;
         justify-content: center;
         flex-wrap: wrap;
         &::-webkit-scrollbar {
             width: 5px;
             border-radius: 10px;
             background-color: lightgray;
-          }
-          &::-webkit-scrollbar-thumb {
+        }
+        &::-webkit-scrollbar-thumb {
             border-radius: 10px;
             background-color: #000;
-          }
+        }
+
+        min-height:80vh;
     }
 }

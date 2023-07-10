@@ -1,7 +1,6 @@
 import {  Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar";
 import {RiRefreshLine} from "react-icons/ri";
-import { Search } from "../components/Search/Search";
 import { Dish } from "../components/Dish/Dish";
 import { SideCart } from "../components/SideCart";
 import { useMeal } from "../services/hooks/useMeal";
@@ -18,32 +17,36 @@ const getDish = (size:number,dishList:any[],loadDish:Function) => {
                 mealState.push(newMeal);
             }
         }
-        loadDish([...mealState])
+        loadDish(mealState.reverse())
     })()
 }
 
 export const Shop:React.FC = () => {
     const [dishList,loadDish] = useState<any[]>([]);
+    const [mealListSize,setMealListSize] = useState<number>(0)
     
     
     useEffect(()=>{
         getDish(16,dishList,loadDish);
+        setMealListSize(mealListSize+16);
     },[])
     
     return <section className="page">
         <Navbar/>
         <div className="page__container">   
-            {/* <Search/> */}
             <div className="page__label">
             <Typography className="page__title">Shop</Typography>
             </div> 
-            {!dishList.length?<Loader/>:
             <div className="product__wrapper" id="page-container">
-                {dishList.map(dish=>{
+            {!dishList.length?<Loader/>:
+                (dishList.map(dish=>{
                     return <Dish key={dish.idMeal} product={dish}/>
-                })}
-            </div>}
-            <div className="pushable" onClick={()=>{getDish(10,dishList,loadDish);}}><Typography className="front"> <RiRefreshLine/></Typography></div>
+                }))}
+            </div>
+            <div className="pushable" onClick={()=>{
+                getDish(10,dishList,loadDish);
+                setMealListSize(mealListSize+10);
+                }}><Typography className={`front ${mealListSize ===  dishList.length?"":"rotate"}`}> <RiRefreshLine/></Typography></div>
         </div>
         <SideCart/>
     </section>

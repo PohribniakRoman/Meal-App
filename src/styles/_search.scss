@@ -1,32 +1,44 @@
 .search {
   margin: 10px;
-  &__field {
-    width: 400px;
-    border-radius: 50px;
-    outline: none;
-    transition: 0.3s;
-    border: none;
-    padding: 12px 12px 12px 35px;
-    font-size: 16px;
-    color: gray;
-    box-shadow: 0 5px 0px 0px lightgray;
-    &::placeholder {
-      font-weight: 500;
-    }
-    &:focus {
-      color: #000;
-    }
-  }
   &__wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
     position: relative;
-  }
-  & svg {
-    position: absolute;
-    left: 15px;
-    font-size: 18px;
-    fill: gray;
-    top: 50%;
-    transform: translateY(-50%);
+    cursor: pointer;
+    transition: .3s;
+    overflow: hidden;
+    & b svg{
+      font-size: 200px;
+      translate:-20px 20px;
+    }
+    & i svg{
+      font-size: 22px;
+    }
+    & i,& b{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      & svg{
+        transition: .3s;
+      }
+    }
+    &:hover{
+      & b svg {
+        font-weight: lighter;
+        font-size: 26px;
+        translate: -1px 0;
+      }
+      & i svg{
+        font-size: 8px;
+        translate: 1px -2px;
+      }
+    }
   }
   &-modal {
     padding: 10px;
