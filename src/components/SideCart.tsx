@@ -27,12 +27,13 @@ export const SideCart:React.FC = () =>{
         <div className="side-cart__border"
         onMouseDown={()=>{document.addEventListener("mousemove",resize)}}></div>
         <div className="side-cart__wrapper">
-            <Typography className="page__title">Cart / {cart.price}<BiDollar/></Typography>
+            <Typography className="page__title">Cart</Typography>
             <div className="side-cart__container">
             {!cart.products.length ?<Typography variant="h5" className="cart__placeholder">There is nothing in your cart:(</Typography> :cart.products.map((product)=>{
                     return <Dish key={product.idMeal} product={product}/>
                 })}
             </div>
+            <Typography className="side-cart__price">{cart.price}<BiDollar/></Typography>
         </div>
     </section>
 } 
