@@ -124,14 +124,12 @@
         justify-content: center;
         flex-wrap: wrap;
         &::-webkit-scrollbar {
-            width: 5px;
-            border-radius: 10px;
-            background-color: lightgray;
+            width:4px;
         }
         &::-webkit-scrollbar-thumb {
             border-radius: 10px;
             background-color: #000;
-        }
+          }
 
         min-height:80vh;
     }
