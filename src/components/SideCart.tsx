@@ -22,7 +22,6 @@ export const SideCart:React.FC = () =>{
                     document.addEventListener("mouseup",()=>{document.removeEventListener("mousemove",resize)});
                 }
                 if(event === "resize"){
-                    console.log(window.innerWidth*0.65+650, window.innerWidth);
                     if(window.innerWidth*0.65+650 > window.innerWidth && container.current.clientWidth-5 < 450){
                         container.current.style.width= 450+"px";
                         dishContainer.style.width = (window.innerWidth-650)+"px";
