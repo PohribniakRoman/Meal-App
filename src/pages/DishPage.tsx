@@ -29,14 +29,13 @@ export const DishPage:React.FC = () => {
             (async ()=>{
                 const result = await meal.getMealById(params);
                 if(result.strMeal){
-                    console.log(result);
                     const newState = (await unsplash.generatePhoto(result.strMeal,8)).map((element:any) => element.urls.small);
                     const ingredientCollector = [] as DishIngredients[];
                     for(const key in result){
-                        if(key.startsWith("strIngredient") && result[key].trim()){
+                        if(key.startsWith("strIngredient") && result[key]?.trim()){
                             ingredientCollector.push({ingredient:result[key],measure:""})
                         }
-                        if(key.startsWith("strMeasure") && result[key].trim()){
+                        if(key.startsWith("strMeasure") && result[key]?.trim()){
                             ingredientCollector[parseInt(key.split("strMeasure")[1])-1].measure = result[key];
                         }
                     }
@@ -60,7 +59,8 @@ export const DishPage:React.FC = () => {
         
     return <section className="dish">
             {!dish || !secondaryImages?<Loader fullsize={true}/>:<>
-            <Link target="_blank" to="https://www.bbcgoodfood.com/recipes/3028701/threecheese-souffls"><Typography variant="h3" className="dish--title">{dish.strMeal}</Typography></Link>
+            <Typography variant="h3" className="dish--title">{dish.strMeal}</Typography>
+            <Link target="_blank" className="dish--link" to="https://www.bbcgoodfood.com/recipes/3028701/threecheese-souffls">link to source</Link>
             <Typography className="dish__globals">
                 <i>{dish.strArea}</i>
                 <b>/</b>

@@ -27,7 +27,10 @@ export const Ingredient:React.FC<Ingredient> = ({data}) =>{
         if(once.current){
         once.current= false;
             (async()=>{
-                loadIngredientImage((await unsplash.generatePhoto(data.ingredient,1))[0].urls.small);
+                const result = await unsplash.generatePhoto(data.ingredient,1);
+                if(result[0]){
+                    loadIngredientImage(result[0].urls.small);
+                }
             })()
         }
     },[]);

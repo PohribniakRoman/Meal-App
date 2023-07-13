@@ -4,24 +4,38 @@ import { Typography } from "@mui/material"
 import { BiDollar } from "react-icons/bi"
 import { Dish } from "./Dish/Dish"
 import { useRef } from "react"
+import { Counter } from "./Counter"
+import { CartPlaceholder } from "./CartPlaceholder"
 
 export const SideCart:React.FC = () =>{
     const cart = useSelector((state:State)=>state.cart)
     const container = useRef<null|HTMLDivElement>(null);
-    const resize = (event:MouseEvent) =>{
+    const resize = (event:MouseEvent | "resize") =>{
         if(container.current){
-            const size = window.innerWidth-event.x; 
-            if(size > 350 && size < window.innerWidth*0.60){
-                container.current.style.width= size+"px";
-                const dishContainer:HTMLDivElement|null = document.querySelector("#page-container");
-                if(dishContainer){
-                    dishContainer.style.width = window.innerWidth-size-125+"px";
+            const size = window.innerWidth - (event !== "resize"?event.x:0); 
+            const dishContainer:HTMLDivElement|null = document.querySelector("#page-container");
+            if(dishContainer){
+                if(size > Math.max(350,window.innerWidth*0.15) && size < window.innerWidth*0.65){
+                    container.current.style.width= Math.min((size/window.innerWidth)*100,73)+"vw";
+                    dishContainer.style.width = Math.min(((window.innerWidth-size-125)/window.innerWidth)*100,73)+"vw";
+                }else{
+                    document.addEventListener("mouseup",()=>{document.removeEventListener("mousemove",resize)});
                 }
-            }else{
-                document.addEventListener("mouseup",()=>{document.removeEventListener("mousemove",resize)});
+                if(event === "resize"){
+                    console.log(window.innerWidth*0.65+650, window.innerWidth);
+                    if(window.innerWidth*0.65+650 > window.innerWidth && container.current.clientWidth-5 < 450){
+                        container.current.style.width= 450+"px";
+                        dishContainer.style.width = (window.innerWidth-650)+"px";
+                    }else if(window.innerHeight > (container.current.clientWidth-5 + dishContainer.clientWidth +125)*1.05){
+                        container.current.style.width= "30vw";
+                        dishContainer.style.width = "60vw";
+                    }
+                }
             }
         }
     }
+    window.addEventListener("resize",()=>resize("resize"));
+
     document.addEventListener("mouseup",()=>{document.removeEventListener("mousemove",resize)});
     return <section className="side-cart" ref={container}>
         <div className="side-cart__border"
@@ -29,11 +43,11 @@ export const SideCart:React.FC = () =>{
         <div className="side-cart__wrapper">
             <Typography className="page__title">Cart</Typography>
             <div className="side-cart__container">
-            {!cart.products.length ?<Typography variant="h5" className="cart__placeholder">There is nothing in your cart:(</Typography> :cart.products.map((product)=>{
+            {!cart.products.length ?<CartPlaceholder variant="h5"/> :cart.products.map((product)=>{
                     return <Dish key={product.idMeal} product={product}/>
                 })}
             </div>
-            <Typography className="side-cart__price">{cart.price}<BiDollar/></Typography>
+            <Typography className="side-cart__price"><Counter value={cart.price}/><BiDollar/></Typography>
         </div>
     </section>
 } 

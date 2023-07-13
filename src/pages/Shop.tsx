@@ -13,8 +13,12 @@ const getDish = (size:number,dishList:any[],loadDish:Function) => {
     (async ()=>{
         while (mealState.length < (dishList.length + size)) {
             const newMeal = await meal.generateMeal();
-            if(!mealState.filter(e=>e.idMeal === newMeal.idMeal).length){
-                mealState.push(newMeal);
+            if(newMeal === "error"){
+                break;
+            }else{
+                if(!mealState.filter(e=>e.idMeal === newMeal.idMeal).length){
+                    mealState.push(newMeal);
+                }
             }
         }
         loadDish(mealState.reverse())
@@ -33,11 +37,11 @@ export const Shop:React.FC = () => {
     
     return <section className="page">
         <Navbar/>
-        <div className="page__container">   
+        <div className="page__container shop" id="page-container">   
             <div className="page__label">
-            <Typography className="page__title">Shop</Typography>
+                <Typography className="page__title">Shop</Typography>
             </div> 
-            <div className="product__wrapper" id="page-container">
+            <div className="product__wrapper">
             {!dishList.length?<Loader/>:
                 (dishList.map(dish=>{
                     return <Dish key={dish.idMeal} product={dish}/>

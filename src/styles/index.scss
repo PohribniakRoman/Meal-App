@@ -2,9 +2,11 @@
 @import "search";
 @import "dish";
 @import "loader";
+@import "counter";
 @import "cart";
 @import "navbar";
 @import "product";
+@import "adaptive";
 
 .fullsize-loader {
   min-width: 100vw;
@@ -15,12 +17,23 @@
 }
 
 .page {
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 600px;
   background-color: #e2e6e8;
   display: flex;
   justify-content: space-between;
   &__container {
+    height: 100%;
+    min-height: 600px;
+
     margin-left: 20px;
+    &.shop{
+      width: 60vw;
+      flex-direction: column;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
     &.fullsize {
       width: calc(100vw - 125px);
     }
@@ -37,7 +50,6 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    // justify-content: space-between;
     justify-content: center;
   }
 }
@@ -45,7 +57,6 @@
   user-select: none;
 }
 .front {
-  will-change: transform;
   transition: transform 250ms;
 }
 
@@ -79,6 +90,7 @@
   align-items: center;
   justify-content: center;
   height: 50px;
+  width: 50px;
     &.rotate{
       & svg{
         animation-name: rotateLoading;

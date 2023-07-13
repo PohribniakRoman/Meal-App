@@ -75,14 +75,14 @@
   }
   &--title{
     text-align: center;
-    font-style: italic;
     margin-top: 40px !important;
     margin-bottom: 30px !important;
+    user-select: none !important;
   }
-  &--subtitle{
-    text-align: center;
-    margin: 20px !important;
-    font-style: italic !important;
+  &--link{
+    transform: translateY(-35px);
+    color: rgb(47, 181, 226) !important;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
   &__cover {
     width: 100%;
