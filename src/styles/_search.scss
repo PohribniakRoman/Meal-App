@@ -95,7 +95,7 @@
           }
           &::-webkit-scrollbar-thumb {
             border-radius: 10px;
-            background-color: #000;
+            background-color: #0e0d0b;
           }
         &--placeholder{
             font-style: italic;
@@ -103,7 +103,7 @@
             text-align: center;
         }
         &--item{
-            color: #000 !important;
+            color: #0e0d0b !important;
             margin-left: 25px;
             display: flex;
             align-items: center;
@@ -121,7 +121,7 @@
               content: '';
               position: absolute;
               height: 2px;
-              background-color: #000;
+              background-color: #0e0d0b;
               bottom: 5px;
               left: 0;
             }

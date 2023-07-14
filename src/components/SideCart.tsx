@@ -43,7 +43,7 @@ export const SideCart:React.FC = () =>{
 
     window.addEventListener("resize",()=>resize("resize"));
     window.addEventListener("mouseup",()=>{document.removeEventListener("mousemove",resize)});
-    return <section className="side-cart" ref={container}>
+    return <section className="side-cart" ref={container} style={{width:"40vw"}}>
         <div className="side-cart__border"
         onMouseDown={()=>{document.addEventListener("mousemove",resize)}} onTouchMove={dragResize}></div>
         <div className="side-cart__wrapper">

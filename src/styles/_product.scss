@@ -17,7 +17,7 @@
   &__store {
     font-size: 12px !important;
     font-weight: 200 !important;
-    color: #000;
+    color: #0e0d0b;
   }
   &__label {
     font-weight: bold !important;
@@ -46,7 +46,7 @@
       width: 100%;
       height: 100%;
       font-size: 28px;
-      background-color: #00000049;
+      background-color: #0e0d0b;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -125,6 +125,21 @@
     align-content: flex-start;
     justify-content: center;
     flex-wrap: wrap;
+    position: relative;
+    &::before, &::after{
+      content: "";
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background: linear-gradient(#e2e6e8 20%,rgba(0,0,0,0));
+      top: 0;
+      z-index: 2;
+      position: sticky;
+    }
+    &::after{
+      rotate: 0.5turn;
+      bottom: 0;
+    }
     & .center-body{
         position: absolute;
         top: 50%;
@@ -135,7 +150,7 @@
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: #000;
+      background-color: #0e0d0b;
     }
   }
 }

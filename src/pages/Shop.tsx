@@ -37,7 +37,7 @@ export const Shop:React.FC = () => {
     
     return <section className="page">
         <Navbar/>
-        <div className="page__container shop" id="page-container">   
+        <div className="page__container shop" id="page-container" style={{width:"50vw"}}>   
             <div className="page__label">
                 <Typography className="page__title">Shop</Typography>
             </div> 

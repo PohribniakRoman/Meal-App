@@ -7,6 +7,11 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+    &__menu{
+        &--label{
+            display: none;
+        }
+    }
     &__item{
         display: flex;
         align-items: center;
@@ -16,6 +21,7 @@
         height: 50px;
         transition: .3s;
         border-radius: 50%;
+
         & svg{
             font-size: 22px;
             fill: #fff;
@@ -39,7 +45,6 @@
         background-color: rgba(255, 255, 255, 0.25);
     }
 }
-
 .navbar__trigger{
     display: none;
 }
