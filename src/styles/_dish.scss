@@ -39,6 +39,7 @@
       position: absolute;
       left: 0;
       top: 0;     
+      text-align: center;
       background-color: #fff;
       padding: 15px;
       display: flex;
@@ -100,6 +101,19 @@
         grid-row-end: 3;
         grid-column-start: 3;
         grid-column-end: 5;
+        &-right,&-left{
+          grid-row-start: 1;
+          grid-row-end: 3;
+        }
+        &-right{
+          grid-column-start: 2;
+          grid-column-end: 4;
+        }
+        &-left{
+          grid-column-start: 4;
+          grid-column-end: 6;
+        }
+
       }
     }
     &--secondary{

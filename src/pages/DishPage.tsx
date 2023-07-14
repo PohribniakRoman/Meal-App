@@ -72,7 +72,18 @@ export const DishPage:React.FC = () => {
                         <img loading="lazy" src={dish.strMealThumb} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
                     </div>
                 :(secondaryImages.map((url,index)=>{
-                    return index === 5?
+                    if(secondaryImages.length < 8){
+                        return index === secondaryImages.length-1 && 
+                        <React.Fragment key={index}>
+                        <div key={dish.strMealThumb} className={`dish__cover--item ${secondaryImages.length === 1?"main-right":"main"}`}>
+                            <img loading="lazy" src={dish.strMealThumb} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
+                        </div>
+                        <div key={url} className={`dish__cover--item ${secondaryImages.length === 1?"main-left":""}`}>
+                            <img loading="lazy" src={url} className="dish__cover--secondary preloader" onLoad={imageLoading}/>
+                        </div>
+                        </React.Fragment>;
+                    }
+                    return index === 0?
                     <React.Fragment key={index}>
                     <div key={dish.strMealThumb} className="dish__cover--item main">
                         <img loading="lazy" src={dish.strMealThumb} className="dish__cover--secondary preloader" onLoad={imageLoading}/>

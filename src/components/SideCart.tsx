@@ -3,7 +3,7 @@ import { State } from "../services/reducers/combinedReducer"
 import { Typography } from "@mui/material"
 import { BiDollar } from "react-icons/bi"
 import { Dish } from "./Dish/Dish"
-import { useRef } from "react"
+import React, { useRef } from "react"
 import { Counter } from "./Counter"
 import { CartPlaceholder } from "./CartPlaceholder"
 
@@ -11,11 +11,10 @@ export const SideCart:React.FC = () =>{
     const cart = useSelector((state:State)=>state.cart)
     const container = useRef<null|HTMLDivElement>(null);
     const resize = (event:MouseEvent | "resize") =>{
-        if(container.current){
             const size = window.innerWidth - (event !== "resize"?event.x:0); 
             const dishContainer:HTMLDivElement|null = document.querySelector("#page-container");
-            if(dishContainer){
-                if(size > Math.max(350,window.innerWidth*0.15) && size < window.innerWidth*0.65){
+            if(dishContainer && container.current){
+                if(size > Math.max(370,window.innerWidth*0.15) && size < window.innerWidth*0.65){
                     container.current.style.width= Math.min((size/window.innerWidth)*100,73)+"vw";
                     dishContainer.style.width = Math.min(((window.innerWidth-size-125)/window.innerWidth)*100,73)+"vw";
                 }else{
@@ -31,14 +30,22 @@ export const SideCart:React.FC = () =>{
                     }
                 }
             }
+    }
+
+    const dragResize = (event:React.TouchEvent<HTMLDivElement>) => {
+        const dishContainer:HTMLDivElement|null = document.querySelector("#page-container");
+        const size = Math.min(Math.max(window.innerWidth - event.nativeEvent.targetTouches[0].clientX,0),window.innerWidth)
+        if(size > Math.max(370,window.innerWidth*0.15) && size < window.innerWidth*0.65 && dishContainer && container.current){
+            container.current.style.width= Math.min((size/window.innerWidth)*100,73)+"vw";
+            dishContainer.style.width = Math.min(((window.innerWidth-size-125)/window.innerWidth)*100,73)+"vw";
         }
     }
-    window.addEventListener("resize",()=>resize("resize"));
 
-    document.addEventListener("mouseup",()=>{document.removeEventListener("mousemove",resize)});
+    window.addEventListener("resize",()=>resize("resize"));
+    window.addEventListener("mouseup",()=>{document.removeEventListener("mousemove",resize)});
     return <section className="side-cart" ref={container}>
         <div className="side-cart__border"
-        onMouseDown={()=>{document.addEventListener("mousemove",resize)}}></div>
+        onMouseDown={()=>{document.addEventListener("mousemove",resize)}} onTouchMove={dragResize}></div>
         <div className="side-cart__wrapper">
             <Typography className="page__title">Cart</Typography>
             <div className="side-cart__container">
