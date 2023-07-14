@@ -1,0 +1,114 @@
+@media (max-width: 900px) {
+    .side-cart{
+        display: none;
+    }
+    .shop{
+        width: 100% !important;
+    }
+    .product__wrapper{
+        max-height: 73vh;
+    }
+    .page{
+        min-height: 100vh !important;
+        height: unset !important;
+        justify-content: space-between;
+        flex-direction: column-reverse;
+    }
+    .navbar{
+        overflow: hidden;
+        height: 75px;
+        flex-direction: row;
+        min-height: 0;
+        min-width: 0;
+        bottom: 0;
+        &__link{
+            z-index: 3 ;
+            margin: 0;
+            margin-right: 15px;
+        }
+        &__item{
+            border-radius: 50px;
+            color: #fff;
+            width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            & svg{
+                margin-right: 10px;
+                font-size: 22px !important;
+            }
+        }
+        &__menu{
+            height: 50px;
+            position: fixed;
+            background-color: #000;
+            width: 100vw;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 2;
+            height: 100vh;
+            translate: 0 100%;
+            transition: .3s;
+            &.opened{
+                translate: 0 0%;
+            }
+        }
+        &__trigger{
+            z-index: 3;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin: 0;
+            padding: 0;
+            transition: .3s;
+            &.opened{
+                transform: rotate(0.5turn);
+            }
+        }
+    }
+    .page__container {
+        margin: 0 !important;
+    }
+    .search{
+        &__wrapper{
+            z-index: 3;
+            margin-left: 15px;
+            margin: 0;
+        }
+    }
+    .page__container.fullsize{
+        width: auto !important;
+    }
+    .side-cart__container{
+        height: 72vh;
+        max-height: 72vh;
+    }
+    .dish{
+        &__ingredients{
+            width: 90%;
+        }
+        &__instruction{
+            width: 90%;
+        }
+    }
+    .dish--link{
+        transform: translateY(-25px);
+    }
+    .dish__video--item{
+        width: 90vw;
+    }
+    .dish--title{
+        font-size: 32px !important;
+        margin: 20px 0 !important;
+    }
+}

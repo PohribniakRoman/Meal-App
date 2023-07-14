@@ -40,6 +40,8 @@ export const Ingredient:React.FC<Ingredient> = ({data}) =>{
             const element = event.target as HTMLDivElement;
             element.addEventListener("mousemove",mouseMoveHandler);
         }}
+        onTouchStart={(e)=>{setHelperState({isVisivle:true,x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY})}}
+        onTouchEnd={()=>{setHelperState({isVisivle:false,x:0,y:0})}}
         onMouseOut={(event)=>{
             const element = event.target as HTMLDivElement;
             element.removeEventListener("mousemove",mouseMoveHandler);
