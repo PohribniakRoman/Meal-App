@@ -30,7 +30,6 @@ export const DishPage:React.FC = () => {
             (async ()=>{
                 const result = await meal.getMealById(params);
                 if(result.strMeal){
-                    console.log(result);
                     const newState = (await unsplash.generatePhoto(result.strMeal,8)).map((element:any) => element.urls.small);
                     const ingredientCollector = [] as DishIngredients[];
                     for(const key in result){
@@ -41,7 +40,6 @@ export const DishPage:React.FC = () => {
                             }
                         }
                     }
-                    console.log(ingredientCollector);
                     updateIngridients(ingredientCollector);
                     loadDish(result);
                     if(!newState.length){

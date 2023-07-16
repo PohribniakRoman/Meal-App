@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { State } from "../services/reducers/combinedReducer"
 import { Button, Typography } from "@mui/material"
 import { BiDollar } from "react-icons/bi"
@@ -10,6 +10,7 @@ import { CartPlaceholder } from "./CartPlaceholder"
 export const SideCart:React.FC = () =>{
     const cart = useSelector((state:State)=>state.cart)
     const container = useRef<null|HTMLDivElement>(null);
+    const dispatch = useDispatch();
     const resize = (event:MouseEvent | "resize") =>{
             const size = window.innerWidth - (event !== "resize"?event.x:0); 
             const dishContainer:HTMLDivElement|null = document.querySelector("#page-container");
@@ -55,7 +56,7 @@ export const SideCart:React.FC = () =>{
             </div>
             <div className="side-cart__controls">
                 <Typography className="side-cart__price"><Counter value={cart.price}/><BiDollar/></Typography>
-                <Button variant="contained" className="side-cart__buy">Buy</Button>
+                <Button variant="contained" onClick={()=>{dispatch({type:"SELL_ITEMS"})}} className="side-cart__buy">Buy</Button>
             </div>
         </div>
     </section>

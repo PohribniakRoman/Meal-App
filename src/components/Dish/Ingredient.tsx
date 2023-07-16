@@ -56,6 +56,7 @@ export const Ingredient:React.FC<Ingredient> = ({data}) =>{
                 }
             }
         }}
+
         onTouchEnd={()=>{setHelperState({isVisivle:false,x:0,y:0})}}
         onMouseOut={(event)=>{
             const element = event.target as HTMLDivElement;

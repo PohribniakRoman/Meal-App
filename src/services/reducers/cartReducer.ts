@@ -21,7 +21,7 @@ export type CartItem = {
 };
 
 export type CartAction = {
-    type: "ADD_ITEM" | "REMOVE_ITEM",
+    type: "ADD_ITEM" | "REMOVE_ITEM" | "SELL_ITEMS",
     payload: any,
 }
 
@@ -44,6 +44,9 @@ export const cartReducer = (state = defaultState, action: CartAction) => {
         case "REMOVE_ITEM":{
             const newState: Cart = { price: state.price - action.payload.price, products: state.products.filter((product: CartItem) => product.idMeal !== action.payload.product.idMeal) }
             return updateStorage(newState)
+        }
+        case "SELL_ITEMS":{
+            return updateStorage({ price: 0, products: [] });
         }
         default:{
             return defaultState;
