@@ -11,12 +11,11 @@ import { DishCounter } from "./DishCounter";
 
 export interface Dish{
     product:CartItem
-    amount?:number
 }
 
-export const Dish:React.FC<Dish> = ({product,amount = 0}) => {
+export const Dish:React.FC<Dish> = ({product}) => {
     const dispatch = useDispatch()
-    const [currentAmount, setCurrentAmount] = useState<number>(amount);
+    const [currentAmount, setCurrentAmount] = useState<number>(product.amount?product.amount : 0);
     const cartProducts = useSelector((state:State)=>state.cart.products)
     
     const checkCart = ():boolean => cartProducts.filter(e=>e.idMeal === product.idMeal).length > 0
