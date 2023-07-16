@@ -39,6 +39,18 @@
       bottom: 0;
     }
   }
+  &__controls{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &__buy{
+    background-color: #0e0d0b !important;
+    padding: 5px 40px !important;
+  }
   &__price {
     margin: 20px !important;
     font-size: 26px !important;

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { State } from "../services/reducers/combinedReducer"
-import { Typography } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import { BiDollar } from "react-icons/bi"
 import { Dish } from "./Dish/Dish"
 import React, { useRef } from "react"
@@ -53,7 +53,10 @@ export const SideCart:React.FC = () =>{
                     return <Dish key={product.idMeal} product={product}/>
                 })}
             </div>
-            <Typography className="side-cart__price"><Counter value={cart.price}/><BiDollar/></Typography>
+            <div className="side-cart__controls">
+                <Typography className="side-cart__price"><Counter value={cart.price}/><BiDollar/></Typography>
+                <Button variant="contained" className="side-cart__buy">Buy</Button>
+            </div>
         </div>
     </section>
 } 

@@ -18,11 +18,18 @@ export const Ingredient:React.FC<Ingredient> = ({data}) =>{
     const [helperState,setHelperState] = useState<HelperLocation>({isVisivle:false,x:0,y:0})
     const unsplash = useUnsplash();
     const once = useRef<boolean>(true);
+    const helper = useRef<null | HTMLDivElement>(null);
 
     const mouseMoveHandler = (event:MouseEvent) =>{
-        setHelperState({isVisivle:true,x:event.x+10,y:event.y})
+        if(helper.current){
+            setHelperState({isVisivle:true,x:-1000,y:-1000})
+            const equalizer = (event.x + helper.current.offsetWidth) > window.innerWidth?-(helper.current.offsetWidth+20):10;
+            if(helper.current.offsetWidth > 0){
+                setHelperState({isVisivle:true,x:event.x+equalizer,y:event.y})
+            }
+        }
     }
-
+    
     useEffect(()=>{
         if(once.current){
         once.current= false;
@@ -40,7 +47,15 @@ export const Ingredient:React.FC<Ingredient> = ({data}) =>{
             const element = event.target as HTMLDivElement;
             element.addEventListener("mousemove",mouseMoveHandler);
         }}
-        onTouchStart={(e)=>{setHelperState({isVisivle:true,x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY})}}
+        onTouchStart={(e)=>{
+            if(helper.current){
+                setHelperState({isVisivle:true,x:-1000,y:-1000})
+                const equalizer = (e.changedTouches[0].clientX + helper.current.offsetWidth) > window.innerWidth?-(helper.current.offsetWidth+20):10;
+                if(helper.current.offsetWidth > 0){
+                    setHelperState({isVisivle:true,x:e.changedTouches[0].clientX+equalizer,y:e.changedTouches[0].clientY})
+                }
+            }
+        }}
         onTouchEnd={()=>{setHelperState({isVisivle:false,x:0,y:0})}}
         onMouseOut={(event)=>{
             const element = event.target as HTMLDivElement;
@@ -50,7 +65,7 @@ export const Ingredient:React.FC<Ingredient> = ({data}) =>{
         >
             <Chip label={data.ingredient}/>
         </div>
-        <div className="dish__ingredients--helper" style={{marginTop:helperState.y+"px",marginLeft:helperState.x+"px",display:`${helperState.isVisivle?"block":"none"}`}}>
+        <div ref={helper} className="dish__ingredients--helper" style={{marginTop:helperState.y+"px",marginLeft:helperState.x+"px",display:`${helperState.isVisivle?"block":"none"}`}}>
             <Typography className="dish__ingredients--helper-measure">{data.measure}</Typography>
             <div className="dish__ingredients--helper-cover" style={{backgroundImage:`url(${ingredientImg})`}}></div>
         </div>

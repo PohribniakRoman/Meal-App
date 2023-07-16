@@ -1,11 +1,11 @@
 .dish {
-  min-height: 100%;
-  max-height: 100vh;
-  overflow: hidden;
-  overflow-y: scroll;
+  min-height: 100vh;
+  background-color: #fff;
+  z-index: 1;
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
   margin: 0 !important;
   width: 100%;
   & a{
@@ -15,13 +15,6 @@
     }
   }
   & *{user-select: text !important;}
-  &::-webkit-scrollbar {
-    width: 0;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #000;
-  }
   &__video{
     &--item{
       width: 50vw;
@@ -36,7 +29,8 @@
     align-items: center;
     justify-content: center;
     &--helper{
-      position: absolute;
+      position:fixed;
+      z-index: 100;
       left: 0;
       top: 0;     
       text-align: center;

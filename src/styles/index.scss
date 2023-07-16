@@ -156,3 +156,7 @@
     z-index: 100;
   }
 }
+
+::-webkit-scrollbar {
+  width: 0;
+}

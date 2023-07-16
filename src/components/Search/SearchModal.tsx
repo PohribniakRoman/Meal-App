@@ -14,7 +14,7 @@ export type modal = {
 
 let currentValue = "";
 let currentList = [] as any[];
-export const SearchModel:React.FC<modal> = ({isOpened,setOpened}:modal) =>{
+export const SearchModal:React.FC<modal> = ({isOpened,setOpened}:modal) =>{
     const modal = useRef<HTMLElement|null>(null);
     const [searchValue,setSearchValue] = useState<string>("");
     const [searchResult,setSearchResult] = useState<"template"|"loading"|any[]>("template");

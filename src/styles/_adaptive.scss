@@ -22,6 +22,11 @@
         min-height: 0;
         min-width: 0;
         bottom: 0;
+        &.row{
+            z-index: 3;
+            position: fixed;
+            bottom: 0;
+        }
         &__link{
             z-index: 4;
             margin: 0;
@@ -29,6 +34,7 @@
         }
         &__item{
             border-radius: 50px;
+            margin: 10px;
             color: #fff;
             width: 120px;
             display: flex;
@@ -40,16 +46,15 @@
             }
         }
         &__menu{
-            height: 50px;
             position: fixed;
             background-color: #0e0d0b;
-            width: 100vw;
+            width: 100vw !important;
             top: 0;
             left: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-direction: column !important; 
             z-index: 3;
             height: 100vh;
             translate: 0 100%;

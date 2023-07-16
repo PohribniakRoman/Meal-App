@@ -12,33 +12,24 @@
     position: relative;
     cursor: pointer;
     transition: .3s;
-    overflow: hidden;
-    & b svg{
-      font-size: 200px;
-      translate:-20px 20px;
-    }
-    & i svg{
-      font-size: 22px;
-    }
-    & i,& b{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      & svg{
-        transition: .3s;
-      }
+    & svg{
+      font-size: 22px !important;
+      z-index: 1;
     }
     &:hover{
-      & b svg {
-        font-weight: lighter;
-        font-size: 26px;
-        translate: -1px 0;
+      color: #fff;
+      &::before{
+        box-shadow: inset 0 0 0px 30px rgba($color: #0e0d0b, $alpha: 1.0);
       }
-      & i svg{
-        font-size: 8px;
-        translate: 1px -2px;
-      }
+    }
+    &::before{
+      content: '';
+      transition: .3s;
+      width: 53px;
+      height: 53px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0px 0px rgba($color: #0e0d0b, $alpha: 1.0);
+      position: absolute;
     }
   }
   &-modal {
