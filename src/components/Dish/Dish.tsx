@@ -6,10 +6,17 @@ import {useEffect, useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { State } from "../../services/reducers/combinedReducer";
 import { Link } from "react-router-dom";
+import { DishCounter } from "./DishCounter";
 
 
-export const Dish:React.FC<Record<string,CartItem | any>> = ({product}:Record<string,CartItem | any>) => {
+export interface Dish{
+    product:CartItem
+    amount?:number
+}
+
+export const Dish:React.FC<Dish> = ({product,amount = 0}) => {
     const dispatch = useDispatch()
+    const [currentAmount, setCurrentAmount] = useState<number>(amount);
     const cartProducts = useSelector((state:State)=>state.cart.products)
     
     const checkCart = ():boolean => cartProducts.filter(e=>e.idMeal === product.idMeal).length > 0
@@ -21,31 +28,36 @@ export const Dish:React.FC<Record<string,CartItem | any>> = ({product}:Record<st
     },[cartProducts])
 
     const addToCart = (product:CartItem)=>{
-        dispatch({type:"ADD_ITEM",payload:{price:Math.floor(product.idMeal/1000),product}});
+        if(product.amount){
+            dispatch({type:"ADD_ITEM",payload:{price:Math.floor(product.idMeal/1000)*product.amount,product}});
+        }else{
+            alert("You can't buy 0 items(")
+        }
     }
 
     const removeFromCart = (product:CartItem)=>{
-        dispatch({type:"REMOVE_ITEM",payload:{price:Math.floor(product.idMeal/1000),product}});
+        dispatch({type:"REMOVE_ITEM",payload:{price:Math.floor(product.idMeal/1000)*product.amount,product}});
     }
 
 
     return <section className="product">
         <div className="product__cover" style={{backgroundImage:`url(${product.strMealThumb})`}} data-category={product.strCategory}>
             {isInCart?
-            <div className="product__cover--button remove" onClick={()=>removeFromCart(product)}>
+            <div className="product__cover--button remove" onClick={()=>removeFromCart({...product,amount:currentAmount})}>
                <Typography className="product__cover--button-icon"><AiOutlineMinus/></Typography>
             </div>:
-            <div className="product__cover--button add" onClick={()=>addToCart(product)}>
+            <div className="product__cover--button add" onClick={()=>addToCart({...product,amount:currentAmount})}>
                 <Typography className="product__cover--button-icon"><AiOutlinePlus/></Typography>
             </div>}
         </div>
         <Link  to={`/dish/${product.idMeal}`} className="product__container">
             <Typography className="product__label">{product.strMeal}</Typography>
-            <Typography className="product__price"><BiDollar/>{Math.floor(product.idMeal/1000)}</Typography>
+            <Typography className="product__price"><BiDollar/>{Math.floor(product.idMeal/1000)*(currentAmount?currentAmount:1)}</Typography>
         </Link>
 
         <div className="product__container">
             <Typography className="product__store">{product.strArea}</Typography>
+            <DishCounter amount={currentAmount} setAmount={setCurrentAmount} isDisabled={isInCart}/>
         </div>
     </section>
 }

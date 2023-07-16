@@ -18,6 +18,7 @@ export type CartItem = {
     strCategory: string,
     strInstructions: string,
     idMeal: number,
+    amount:number,
 };
 
 export type CartAction = {

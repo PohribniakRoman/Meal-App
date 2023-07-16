@@ -51,7 +51,7 @@ export const SideCart:React.FC = () =>{
             <Typography className="page__title">Cart</Typography>
             <div className="side-cart__container">
             {!cart.products.length ?<CartPlaceholder variant="h5"/> :cart.products.map((product)=>{
-                    return <Dish key={product.idMeal} product={product}/>
+                    return <Dish key={product.idMeal} product={product} amount={product.amount}/>
                 })}
             </div>
             <div className="side-cart__controls">

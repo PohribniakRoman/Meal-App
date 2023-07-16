@@ -25,6 +25,44 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  &__amount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &--value{
+      background-color: #fff;
+      padding: 1px 10px;
+      &.disabled{
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        background: #000;
+        top: 5px;
+        right: 10px;
+        z-index: 1;
+        color: #fff;
+        border-radius: 50%;
+      }
+    }
+    &--add,&--remove{
+      cursor: pointer;
+      padding: 5px 10px;
+      background-color: #0e0d0b;
+      color: #fff;
+    }
+    &--add{
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+    }
+    &--remove{
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+  }
   &__cover {
     width: 300px;
     height: 200px;
