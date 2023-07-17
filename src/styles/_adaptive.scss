@@ -12,7 +12,7 @@
     }
     .page{
         min-height: 100vh !important;
-        min-height: 100svh !important;
+        min-height: calc(100svh - 75px) !important;
         height: unset !important;
         justify-content: space-between;
         flex-direction: column-reverse;
@@ -101,10 +101,6 @@
     .page__container.fullsize{
         width: auto !important;
     }
-    .side-cart__container{
-        height: 450px;
-        max-height: 450px;
-    }
     .dish{
         &__ingredients{
             width: 90%;
@@ -126,5 +122,20 @@
     .search-modal{
         width: 80%;
         margin-bottom: 100%;
+    }
+}
+@media (max-height:900px) {
+    .side-cart__container {
+       height: 80%;
+    }
+}
+@media (max-height:750px) {
+    .side-cart__container {
+       height: 70%;
+    }
+}
+@media (max-height:550px) {
+    .side-cart__container {
+       height: 65%;
     }
 }
