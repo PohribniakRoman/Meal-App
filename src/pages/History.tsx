@@ -19,6 +19,7 @@ export const History:React.FC = () => {
         <Navbar/>
         <div className="page__container fullsize flex">   
             <Typography className="page__title">Purchase History</Typography>
+            {history.current.length?
             <div className="purchase">
                     {history.current.map((bill:Cart,index)=>{
                         return <div className="purchase--item" key={index}>
@@ -32,7 +33,7 @@ export const History:React.FC = () => {
                                 <Typography className="purchase--total"><BiDollar/>{bill.price}.00</Typography>
                         </div>
                     })} 
-            </div>
+            </div>:<Typography variant="h3" className="cart__placeholder">You don't have <br/> settlement checks yet</Typography>}
         </div>
     </section>
 }
