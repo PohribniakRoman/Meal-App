@@ -8,7 +8,7 @@ export interface CounterInterface {
 export const Counter:React.FC<CounterInterface> = ({value = 0}) =>{
     const [currentValue,setCurrentValue]= useState<number>(0);
     useEffect(()=>{
-        const timming = value/Math.abs(value-currentValue)-5;
+        const timming = (value/Math.abs(value-currentValue)-5) % 1000;
         const count = setInterval(()=>{
             if(currentValue !== value){
                 value > currentValue

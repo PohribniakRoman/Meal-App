@@ -2,11 +2,15 @@
     if (!localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify({price: 0, products: []}))
     }
+    if(!localStorage.getItem("history")){
+        localStorage.setItem("history",JSON.stringify([]))
+    }
 })()
 
 export type Cart = {
     price: number;
     products: CartItem[],
+    date?:Date,
 }
 
 export type CartItem = {
@@ -31,15 +35,24 @@ const updateStorage = (state: Cart) => {
     return (state);
 }
 
+const loadToHistory = (state:Cart) => {
+    const history = localStorage.getItem("history");
+    if(history){
+        const lastHistory = JSON.parse(history);
+        localStorage.setItem("history",JSON.stringify([...lastHistory,state]));
+    }
+}
+
 const cart = localStorage.getItem("cart");
 let defaultState: Cart = { price: 0, products: [] };
-if (cart !== null) {
+if (cart) {
     defaultState = JSON.parse(cart);
 }
 
 export const cartReducer = (state = defaultState, action: CartAction) => {
     switch (action.type) {
         case "ADD_ITEM":{
+            action.payload.product.price = action.payload.price;
             return updateStorage({ price: state.price + action.payload.price, products: [...state.products, action.payload.product] })
         }
         case "REMOVE_ITEM":{
@@ -47,6 +60,11 @@ export const cartReducer = (state = defaultState, action: CartAction) => {
             return updateStorage(newState)
         }
         case "SELL_ITEMS":{
+            if(state.price){
+                const localState = {...state};
+                localState.date = new Date();
+                loadToHistory(localState);
+            }
             return updateStorage({ price: 0, products: [] });
         }
         default:{

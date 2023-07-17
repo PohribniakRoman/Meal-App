@@ -1,6 +1,6 @@
 import {Link, useLocation} from "react-router-dom";
-import {AiOutlineHome,AiOutlineShoppingCart,AiOutlineHeart, AiFillGithub} from "react-icons/ai"
-import {MdKeyboardDoubleArrowUp} from "react-icons/md"
+import {AiOutlineHome,AiOutlineShoppingCart, AiFillGithub} from "react-icons/ai"
+import {MdHistoryEdu, MdKeyboardDoubleArrowUp} from "react-icons/md"
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import { SearchModal } from "./Search/SearchModal";
@@ -38,9 +38,9 @@ export const Navbar:React.FC<Navbar> = ({variant = "column"}) => {
                     <AiOutlineShoppingCart/><Typography className="navbar__menu--label">Cart</Typography>
                 </nav>
             </Link>       
-            <Link to="/saved">
-                <nav className={isActive("/saved")}>
-                    <AiOutlineHeart/><Typography className="navbar__menu--label">Saved</Typography>
+            <Link to="/history">
+                <nav className={isActive("/history")}>
+                    <MdHistoryEdu/><Typography className="navbar__menu--label">History</Typography>
                 </nav>
             </Link>
         </div>
