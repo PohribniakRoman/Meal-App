@@ -57,6 +57,7 @@
             flex-direction: column !important; 
             z-index: 3;
             height: 100vh;
+            height: 100svh;
             translate: 0 100%;
             transition: .3s;
             &--label{
@@ -100,7 +101,9 @@
     }
     .side-cart__container{
         height: 72vh;
+        height: 72svh;
         max-height: 72vh;
+        max-height: 72svh;
     }
     .dish{
         &__ingredients{

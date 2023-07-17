@@ -1,5 +1,6 @@
 .side-cart {
   height: 100vh;
+  height: 100svh;
   min-height: 600px;
   position: relative;
   margin-left: 20px;
@@ -69,6 +70,7 @@
   }
   &__border {
     height: 100vh;
+    height: 100svh;
     min-height: 600px;
     width: 1px;
     padding: 0 2px;
