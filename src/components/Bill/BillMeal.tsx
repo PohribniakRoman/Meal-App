@@ -13,11 +13,11 @@ export const BillMeal:React.FC<BillMeal> = ({meal}) =>{
             <Link  to={`/dish/${meal.idMeal}`}  className="purchase--dishes-label">
                 <Typography>{meal.strMeal}</Typography>
             </Link>
-            <Typography className="purchase--dishes-price">{meal.amount * meal.price}<BiDollar/></Typography>
+            <Typography className="purchase--dishes-price">{meal.price}<BiDollar/></Typography>
         </div>
         <div className="purchase--dishes-container">
             <Typography className="purchase--dishes-origin">{meal.strArea}</Typography>
-            <Typography className="purchase--dishes-calc">{meal.amount} x {meal.price}</Typography>
+            <Typography className="purchase--dishes-calc">{meal.amount} x {meal.price/meal.amount}</Typography>
         </div>
     </div>
 }
