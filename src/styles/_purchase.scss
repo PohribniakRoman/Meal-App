@@ -52,7 +52,7 @@
             }
         }
         &-label{
-            width: 80%;
+            width: 70%;
             & p{
                 font-size: 18px !important;
                 max-width: 100%;
@@ -64,8 +64,9 @@
         &-price{
             font-size: 18px !important;
             font-weight: bold !important;
+            display: flex;
             & svg{
-                translate: -3px 2px;
+                translate: -3px 3px;
             }
         }
         &-wrapper{
