@@ -18,8 +18,8 @@
     .navbar{
         overflow: hidden;
         height: 75px;
+        min-height: 75px;
         flex-direction: row;
-        min-height: 0;
         min-width: 0;
         bottom: 0;
         &.row{
