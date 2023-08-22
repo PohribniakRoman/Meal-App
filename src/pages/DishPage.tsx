@@ -18,39 +18,35 @@ export const DishPage:React.FC = () => {
     const params = useParams();
     const meal = useMeal();
     const unsplash = useUnsplash();
-    const once = useRef<boolean>(true);
     const [dish,loadDish] = useState<CartItem|null>(null)
     const [secondaryImages,loadSecondaryImages] = useState<null|string[]|"error">(null);
     const [dishIngredients,updateIngridients] = useState<DishIngredients[]|[]>([]);
 
     
     useEffect(()=>{
-        if(once.current){
-            once.current = false; 
-            (async ()=>{
-                const result = await meal.getMealById(params);
-                if(result.strMeal){
-                    const newState = (await unsplash.generatePhoto(result.strMeal,8)).map((element:any) => element.urls.small);
-                    const ingredientCollector = [] as DishIngredients[];
-                    for(const key in result){
-                        if(key.startsWith("strIngredient") && result[key]?.trim()){
-                            if(!ingredientCollector.filter(ing=>ing.ingredient === result[key]).length){
-                                const currentIndex = parseInt(key.split("strIngredient")[1]);
-                                ingredientCollector.push({ingredient:result[key],measure:result["strMeasure"+currentIndex]})
-                            }
+        (async ()=>{
+            const result = await meal.getMealById(params);
+            if(result.strMeal){
+                const newState = (await unsplash.generatePhoto(result.strMeal,8)).map((element:any) => element.urls.small);
+                const ingredientCollector = [] as DishIngredients[];
+                for(const key in result){
+                    if(key.startsWith("strIngredient") && result[key]?.trim()){
+                        if(!ingredientCollector.filter(ing=>ing.ingredient === result[key]).length){
+                            const currentIndex = parseInt(key.split("strIngredient")[1]);
+                            ingredientCollector.push({ingredient:result[key],measure:result["strMeasure"+currentIndex]})
                         }
                     }
-                    updateIngridients(ingredientCollector);
-                    loadDish(result);
-                    if(!newState.length){
-                        loadSecondaryImages("error");
-                    }else{
-                        loadSecondaryImages(newState);
-                    }
                 }
-            })();
-        }
-    },[])
+                updateIngridients(ingredientCollector);
+                loadDish(result);
+                if(!newState.length){
+                    loadSecondaryImages("error");
+                }else{
+                    loadSecondaryImages(newState);
+                }
+            }
+        })();
+    },[params.id])
     
     const imageLoading = (event:React.SyntheticEvent<HTMLImageElement, Event>) =>{
         const element = event.target as HTMLImageElement;

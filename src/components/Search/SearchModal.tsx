@@ -4,7 +4,7 @@ import { SearchInput } from "./SearchInput";
 import { useMeal } from "../../services/hooks/useMeal";
 import { Loader } from "../loaders/Loader";
 import { SearchServices } from "./SearchServices";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export type modal = {
     isOpened:boolean|"loaded",
@@ -18,8 +18,9 @@ export const SearchModal:React.FC<modal> = ({isOpened,setOpened}:modal) =>{
     const modal = useRef<HTMLElement|null>(null);
     const [searchValue,setSearchValue] = useState<string>("");
     const [searchResult,setSearchResult] = useState<"template"|"loading"|any[]>("template");
+    const navigate = useNavigate();
     const meal = useMeal();
-    
+
     useEffect(()=>{
         if(searchValue.trim().length === 1 && currentValue !== searchValue){
             (async ()=>{
@@ -50,9 +51,10 @@ export const SearchModal:React.FC<modal> = ({isOpened,setOpened}:modal) =>{
                         {searchResult === "template" && <Typography className="search-modal__result--placeholder">Type something...</Typography>}
                         {searchResult === "loading" && <Loader/>}
                         {typeof searchResult === "object" && searchResult !== null && searchResult.map(dish=>{
-                            return  <React.Fragment  key={dish.idMeal}><Link to={`/dish/${dish.idMeal}`}className="search-modal__result--item">
+                            return  <React.Fragment  key={dish.idMeal}>
+                            <div onClick={()=>{navigate(`/dish/${dish.idMeal}`)}} className="search-modal__result--item">
                                 <Typography >{dish.strMeal}</Typography>
-                            </Link><br/>
+                            </div><br/>
                             </React.Fragment>
                         })}
                     </div>
