@@ -5,7 +5,7 @@ import {BiDollar} from "react-icons/bi";
 import {useEffect, useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { State } from "../../services/reducers/combinedReducer";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { DishCounter } from "./DishCounter";
 
 

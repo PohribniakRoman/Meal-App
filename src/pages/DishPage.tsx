@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom"
 import { useMeal } from "../services/hooks/useMeal";
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Loader } from "../components/loaders/Loader";
 import { CartItem } from "../services/reducers/cartReducer";
 import { Typography } from "@mui/material";

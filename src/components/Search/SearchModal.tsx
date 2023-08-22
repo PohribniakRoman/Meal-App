@@ -4,7 +4,7 @@ import { SearchInput } from "./SearchInput";
 import { useMeal } from "../../services/hooks/useMeal";
 import { Loader } from "../loaders/Loader";
 import { SearchServices } from "./SearchServices";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export type modal = {
     isOpened:boolean|"loaded",
